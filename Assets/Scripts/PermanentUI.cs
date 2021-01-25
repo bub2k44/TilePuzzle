@@ -7,12 +7,14 @@ public class PermanentUI : MonoBehaviour
     public static PermanentUI perm;
     public LevelLoader ll;
     public TextMeshProUGUI scoreTxt = default;
-    public TextMeshProUGUI levelTxt = default; 
+    public TextMeshProUGUI levelTxt = default;
+    public TextMeshProUGUI levelStageTxt = default;//
     public ParticleSystem[] fireWorks;
     public CanvasGroup[] images;
     public CameraShake cameraShake;
     public int score = 0;
     public int level = 1;
+    public int levelstage = 1;//
     public int pieceCounter = 0;
     public int imageCount = 0;
 
@@ -36,12 +38,22 @@ public class PermanentUI : MonoBehaviour
     {
         scoreTxt.text = score.ToString();
         levelTxt.text = level.ToString();
+        levelStageTxt.text = levelstage.ToString();//
+      
+        /*if (level == 1 && pieceCounter == 6)
+        {
+            EndLevel();
+            images[0].alpha = 1f;
+        }*/
 
-        if (level == 1 && pieceCounter == 6)
+
+        if (level == 1 && levelstage == 1 && pieceCounter == 6)
         {
             EndLevel();
             images[0].alpha = 1f;
         }
+
+
         if (level == 2 && pieceCounter == 8)
         {
             EndLevel();
@@ -73,7 +85,10 @@ public class PermanentUI : MonoBehaviour
     {
         StartCoroutine(NewLevel());
         SoundManager.PlaySound("PowerUp");
-        level++;
+
+        //level++;
+        levelstage++;
+
         pieceCounter = 0;
         cameraShake.ShakeCamera();
         PlayFireWorks();

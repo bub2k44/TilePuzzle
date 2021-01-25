@@ -15,7 +15,8 @@ public class PuzzlePieces : MonoBehaviour
     public void SetPuzzle()
     {
         _holdBoxPosition = transform.position;
-        transform.position = new Vector3(Random.Range(1.5f, 6.5f), Random.Range(1.5f, -2.0f));
+        //transform.position = new Vector3(Random.Range(1.5f, 6.5f), Random.Range(1.5f, -2.0f));
+        transform.position = new Vector3(Random.Range(4f, 5.5f), Random.Range(1.75f, -2.5f));
     }
 
     private void CheckPuzzlePosition()
