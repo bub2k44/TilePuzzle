@@ -79,6 +79,26 @@ public class PermanentUI : MonoBehaviour
         PlayFireWorks();
     }
 
+    public void SkipLevel()
+    {
+        StartCoroutine(NewLevel());
+        //SoundManager.PlaySound("PowerUp");
+
+        //level++;
+        levelstage++;
+
+        pieceCounter = 0;
+        //cameraShake.ShakeCamera();
+        //PlayFireWorks();
+    }
+
+    public void ReloadLevel()
+    {
+        StartCoroutine(RestartLevel());
+    
+        pieceCounter = 0;
+    }
+
     private void PlayFireWorks()
     {
         for (int i = 0; i < fireWorks.Length; i++)
@@ -91,5 +111,11 @@ public class PermanentUI : MonoBehaviour
     {  
         yield return new WaitForSeconds(2);
         ll.LoadNextLevel();
+    }
+
+    private IEnumerator RestartLevel()
+    {
+        yield return new WaitForSeconds(2);
+        ll.ReloadLevel();
     }
 }
