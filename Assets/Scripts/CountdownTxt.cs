@@ -8,7 +8,7 @@ public class CountdownTxt : MonoBehaviour
     [SerializeField]
     private GameObject puzzleHolder;
     [SerializeField]
-    private GameObject puzzlePieces;
+    private GameObject holderBackground;
     [SerializeField]
     private TextMeshProUGUI countdownTxt;
     private float currentTime = 0;
@@ -25,14 +25,18 @@ public class CountdownTxt : MonoBehaviour
     private void Update()
     {
         currentTime -= 1 * Time.deltaTime;
-        countdownTxt.text = "Timer: " + currentTime.ToString("0");
+        countdownTxt.text = currentTime.ToString("0");
 
         if (currentTime <= 0)
         {
             currentTime = 0;
             puzzleHolder.SetActive(false);
-            puzzlePieces.SetActive(false);
+            holderBackground.SetActive(false);
             replayBtn.SetActive(true);
+        }
+        else
+        {
+            replayBtn.SetActive(false);
         }
     }
 }

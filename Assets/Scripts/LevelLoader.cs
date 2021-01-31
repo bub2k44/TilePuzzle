@@ -19,19 +19,12 @@ public class LevelLoader : MonoBehaviour
         _gm.LastCheckPointPos = new Vector2(0, 1.5f);
     }
 
-    public void ReloadLevel() => StartCoroutine(RestartLevel(SceneManager.GetActiveScene().buildIndex));
+    public void ReloadLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
 
     private IEnumerator LoadLevel(int levelIndex)
     {
         transition.SetTrigger("start");
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(levelIndex, LoadSceneMode.Single);
-    }
-
-    private IEnumerator RestartLevel(int levelIndex)
-    {
-        transition.SetTrigger("start");
-        yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
     }
 }

@@ -7,12 +7,14 @@ public class PermanentUI : MonoBehaviour
     public static PermanentUI perm;
     public LevelLoader ll;
     public TextMeshProUGUI scoreTxt = default;
-    public TextMeshProUGUI levelTxt = default; 
+    public TextMeshProUGUI levelTxt = default;
+    public TextMeshProUGUI stageTxt = default;//
     public ParticleSystem[] fireWorks;
     public CanvasGroup[] images;
     public CameraShake cameraShake;
     public int score = 0;
     public int level = 1;
+    public int stage = 1;//
     public int pieceCounter = 0;
     public int imageCount = 0;
 
@@ -36,13 +38,52 @@ public class PermanentUI : MonoBehaviour
     {
         scoreTxt.text = score.ToString();
         levelTxt.text = level.ToString();
+        stageTxt.text = stage.ToString();//
+      
+        /*if (level == 1 && pieceCounter == 6)
+        {
+            EndLevel();
+            images[0].alpha = 1f;
+        }*/
 
-        if (level == 1 && pieceCounter == 6)
+
+        if (level == 1 && stage == 1 && pieceCounter == 6)
+        {
+            EndStage();
+            images[0].alpha = 1f;
+        }
+
+        if (level == 1 && stage == 2 && pieceCounter == 12)
+        {
+            EndStage();
+            images[0].alpha = 1f;
+        }
+
+        if (level == 1 && stage == 3 && pieceCounter == 18)
         {
             EndLevel();
             images[0].alpha = 1f;
         }
-        if (level == 2 && pieceCounter == 8)
+
+        if (level == 2 && stage == 1 && pieceCounter == 26)
+        {
+            EndStage();
+            images[0].alpha = 1f;
+        }
+
+        if (level == 2 && stage == 2 && pieceCounter == 34)
+        {
+            EndStage();
+            images[0].alpha = 1f;
+        }
+
+        if (level == 2 && stage == 3 && pieceCounter == 42)
+        {
+            EndLevel();
+            images[0].alpha = 1f;
+        }
+         
+        /*if (level == 2 && pieceCounter == 8)
         {
             EndLevel();
             images[1].alpha = 1f;
@@ -66,37 +107,32 @@ public class PermanentUI : MonoBehaviour
         {
             EndLevel();
             levelTxt.text = "";
-        }
+        }*/
+    }
+
+    private void EndStage()
+    {
+        StartCoroutine(NewLevel());
+        SoundManager.PlaySound("PowerUp");
+
+        stage++;
+
+        pieceCounter = 0;
+        cameraShake.ShakeCamera();
+        PlayFireWorks();
     }
 
     private void EndLevel()
     {
         StartCoroutine(NewLevel());
         SoundManager.PlaySound("PowerUp");
+
         level++;
+        stage = 1;
+        
         pieceCounter = 0;
         cameraShake.ShakeCamera();
         PlayFireWorks();
-    }
-
-    public void SkipLevel()
-    {
-        StartCoroutine(NewLevel());
-        //SoundManager.PlaySound("PowerUp");
-
-        //level++;
-        levelstage++;
-
-        pieceCounter = 0;
-        //cameraShake.ShakeCamera();
-        //PlayFireWorks();
-    }
-
-    public void ReloadLevel()
-    {
-        StartCoroutine(RestartLevel());
-    
-        pieceCounter = 0;
     }
 
     private void PlayFireWorks()
@@ -111,11 +147,5 @@ public class PermanentUI : MonoBehaviour
     {  
         yield return new WaitForSeconds(2);
         ll.LoadNextLevel();
-    }
-
-    private IEnumerator RestartLevel()
-    {
-        yield return new WaitForSeconds(2);
-        ll.ReloadLevel();
     }
 }
