@@ -6,16 +6,16 @@ using TMPro;
 public class CountdownTxt : MonoBehaviour
 {
     [SerializeField]
-    private GameObject puzzleHolder;
+    private GameObject puzzleHolder = default;
     [SerializeField]
-    private GameObject holderBackground;
+    private GameObject holderBackground = default;
     [SerializeField]
-    private TextMeshProUGUI countdownTxt;
+    private TextMeshProUGUI countdownTxt = default;
     private float currentTime = 0;
     [SerializeField]
     private float startTime = 90;
     [SerializeField]
-    private GameObject replayBtn;
+    private GameObject replayBtn = default;
 
     private void Start()
     {

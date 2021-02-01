@@ -53,33 +53,33 @@ public class PermanentUI : MonoBehaviour
             images[0].alpha = 1f;
         }
 
-        if (level == 1 && stage == 2 && pieceCounter == 12)
+        if (level == 1 && stage == 2 && pieceCounter == 6)
         {
             EndStage();
             images[0].alpha = 1f;
         }
 
-        if (level == 1 && stage == 3 && pieceCounter == 18)
-        {
-            EndLevel();
-            images[0].alpha = 1f;
-        }
-
-        if (level == 2 && stage == 1 && pieceCounter == 26)
+        if (level == 1 && stage == 3 && pieceCounter == 6)
         {
             EndStage();
             images[0].alpha = 1f;
         }
 
-        if (level == 2 && stage == 2 && pieceCounter == 34)
+        if (level == 2 && stage == 1 && pieceCounter == 8)
         {
             EndStage();
             images[0].alpha = 1f;
         }
 
-        if (level == 2 && stage == 3 && pieceCounter == 42)
+        if (level == 2 && stage == 2 && pieceCounter == 8)
         {
-            EndLevel();
+            EndStage();
+            images[0].alpha = 1f;
+        }
+
+        if (level == 2 && stage == 3 && pieceCounter == 8)
+        {
+            EndStage();
             images[0].alpha = 1f;
         }
          
@@ -116,7 +116,11 @@ public class PermanentUI : MonoBehaviour
         SoundManager.PlaySound("PowerUp");
 
         stage++;
-
+        if (stage == 4)
+        {
+            level++;
+            stage = 1;
+        }
         pieceCounter = 0;
         cameraShake.ShakeCamera();
         PlayFireWorks();
