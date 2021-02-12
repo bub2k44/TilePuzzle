@@ -85,9 +85,7 @@ public class PermanentUI : MonoBehaviour
             for (int i = 0; i < imagesLevel1.Length; i++)
             {
                 imagesLevel1[i].alpha = 0f;
-            }
-
-            
+            }          
         }
 
         if (level == 2 && stage == 1 && pieceCounter == 8)
@@ -140,12 +138,6 @@ public class PermanentUI : MonoBehaviour
         StartCoroutine(NewLevel());
         SoundManager.PlaySound("PowerUp");
 
-        //stage++;
-        /*if (stage == 4)
-        {
-            level++;
-            stage = 1;
-        }*/
         pieceCounter = 0;
         cameraShake.ShakeCamera();
         PlayFireWorks();
