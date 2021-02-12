@@ -5,24 +5,34 @@ using UnityEngine;
 public class PermanentUI : MonoBehaviour
 {
     public static PermanentUI perm;
+
     public LevelLoader ll;
+
     public TextMeshProUGUI scoreTxt = default;
     public TextMeshProUGUI levelTxt = default;
     public TextMeshProUGUI stageTxt = default;//
+
     public ParticleSystem[] fireWorks;
-    public CanvasGroup[] images;
+
+    public CanvasGroup[] imagesLevel1;
+    public CanvasGroup[] imagesLevel2;
+
     public CameraShake cameraShake;
+
     public int score = 0;
     public int level = 1;
     public int stage = 1;//
     public int pieceCounter = 0;
     public int imageCount = 0;
+
     public bool canTime = false;
+
     public GameObject timer;
+
+    public CountdownTxt countdownTxt;
 
     private void Start()
     {
-        timer = GameObject.FindGameObjectWithTag("Timer");
         canTime = true;
         DontDestroyOnLoad(gameObject);
 
@@ -43,48 +53,59 @@ public class PermanentUI : MonoBehaviour
         scoreTxt.text = score.ToString();
         levelTxt.text = level.ToString();
         stageTxt.text = stage.ToString();//
-      
-        /*if (level == 1 && pieceCounter == 6)
-        {
-            EndLevel();
-            images[0].alpha = 1f;
-        }*/
-
 
         if (level == 1 && stage == 1 && pieceCounter == 6)
         {
             EndStage();
-            images[0].alpha = 1f;
+            imagesLevel1[0].alpha = 1f;
         }
 
         if (level == 1 && stage == 2 && pieceCounter == 6)
         {
             EndStage();
-            images[0].alpha = 1f;
+            imagesLevel1[1].alpha = 1f;
         }
 
         if (level == 1 && stage == 3 && pieceCounter == 6)
         {
             EndStage();
-            images[0].alpha = 1f;
+            imagesLevel1[2].alpha = 1f;
+        }
+        if (level == 1 && stage == 4 && pieceCounter == 6)
+        {
+            EndStage();
+            imagesLevel1[3].alpha = 1f;
+        }
+
+        if (level == 1 && stage == 5 && pieceCounter == 6)
+        {
+            EndStage();
+            imagesLevel1[4].alpha = 1f;
+
+            for (int i = 0; i < imagesLevel1.Length; i++)
+            {
+                imagesLevel1[i].alpha = 0f;
+            }
+
+            
         }
 
         if (level == 2 && stage == 1 && pieceCounter == 8)
-        {
+        {      
             EndStage();
-            images[0].alpha = 1f;
+            imagesLevel2[0].alpha = 1f;
         }
 
         if (level == 2 && stage == 2 && pieceCounter == 8)
         {
             EndStage();
-            images[0].alpha = 1f;
+            imagesLevel2[1].alpha = 1f;
         }
 
         if (level == 2 && stage == 3 && pieceCounter == 8)
         {
             EndStage();
-            images[0].alpha = 1f;
+            imagesLevel1[0].alpha = 1f;
         }
          
         /*if (level == 2 && pieceCounter == 8)
@@ -157,13 +178,19 @@ public class PermanentUI : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         ll.LoadNextLevel();
+        
         yield return new WaitForSeconds(1);
         stage++;
-        //timer = GameObject.FindGameObjectWithTag("Timer");
-       // timer.SetActive(true);
-        //canTime = true;
-        if (stage == 4)
+        timer.SetActive(true);
+        countdownTxt.currentTime = 20;
+
+        if (stage > 5)
         {
+            for (int j = 0; j < imagesLevel2.Length; j++)
+            {
+                imagesLevel2[j].alpha = 0.2f;
+            }
+
             level++;
             stage = 1;
         }

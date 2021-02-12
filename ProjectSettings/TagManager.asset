@@ -8,6 +8,9 @@ TagManager:
   - GM
   - Missile
   - Timer
+  - HolderBackground
+  - PuzzleHolder
+  - ReplayButton
   layers:
   - Default
   - TransparentFX

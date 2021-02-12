@@ -30,7 +30,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4382187013849922067}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -182,8 +182,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: -151.59195}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4382187014003008961}
   - {fileID: 4382187013687366895}
+  - {fileID: 4382187014003008961}
   m_Father: {fileID: 4382187015481376447}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 4382187014003008960}
   m_Layer: 5
   m_Name: CountdownTxt
-  m_TagString: Untagged
+  m_TagString: Timer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,7 +223,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4382187013849922067}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -365,6 +365,7 @@ MonoBehaviour:
   countdownTxt: {fileID: 4382187014003008967}
   startTime: 20
   replayBtn: {fileID: 4382187014816586285}
+  currentTime: 0
 --- !u!1 &4382187014816586285
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,7 +567,7 @@ RectTransform:
   m_GameObject: {fileID: 4382187015481376443}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4382187013849922067}
   - {fileID: 4382187014816586284}

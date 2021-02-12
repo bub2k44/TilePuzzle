@@ -7,15 +7,23 @@ public class CountdownTxt : MonoBehaviour
 {
     [SerializeField]
     private GameObject puzzleHolder = default;
+
     [SerializeField]
     private GameObject holderBackground = default;
+
+    [SerializeField]
+    private GameObject timer = default;
+
     [SerializeField]
     private TextMeshProUGUI countdownTxt = default;
-    private float currentTime = 0;
+
     [SerializeField]
-    private float startTime = 90;
+    public float startTime = 90;
+
     [SerializeField]
     private GameObject replayBtn = default;
+
+    public float currentTime = 0;
 
     private void Start()
     {
@@ -24,11 +32,11 @@ public class CountdownTxt : MonoBehaviour
 
     private void Update()
     {
+        timer = GameObject.FindGameObjectWithTag("Timer");
+        puzzleHolder = GameObject.FindGameObjectWithTag("PuzzleHolder");
+        holderBackground = GameObject.FindGameObjectWithTag("HolderBackground");
+
         Timer();
-        //if (PermanentUI.perm.canTime==true)
-        //{
-        //    Timer();
-        //}
     }
 
     public void Timer()
@@ -39,6 +47,8 @@ public class CountdownTxt : MonoBehaviour
         if (currentTime <= 0)
         {
             currentTime = 0;
+
+            timer.SetActive(false);
             puzzleHolder.SetActive(false);
             holderBackground.SetActive(false);
             replayBtn.SetActive(true);

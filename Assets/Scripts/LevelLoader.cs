@@ -8,16 +8,16 @@ public class LevelLoader : MonoBehaviour
     public float transitionTime = 1f;
     public GameObject timer;
 
-    private GameMaster _gm;
+    //private GameMaster _gm;
 
-    private void Start() => _gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+    //private void Start() => _gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
 
     public void LoadNextLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
 
     public void LoadLevel2()
     {
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
-        _gm.LastCheckPointPos = new Vector2(0, 1.5f);
+        //_gm.LastCheckPointPos = new Vector2(0, 1.5f);
     }
 
     public void ReloadLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
@@ -27,7 +27,7 @@ public class LevelLoader : MonoBehaviour
         transition.SetTrigger("start");
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(levelIndex, LoadSceneMode.Single);
-        timer = GameObject.FindGameObjectWithTag("Timer");
-        timer.SetActive(true);
+        //timer = GameObject.FindGameObjectWithTag("Timer");
+        //timer.SetActive(true);
     }
 }
