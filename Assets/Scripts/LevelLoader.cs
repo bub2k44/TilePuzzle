@@ -6,6 +6,7 @@ public class LevelLoader : MonoBehaviour
 {
     public Animator transition;
     public float transitionTime = 1f;
+    public GameObject timer;
 
     private GameMaster _gm;
 
@@ -26,5 +27,7 @@ public class LevelLoader : MonoBehaviour
         transition.SetTrigger("start");
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(levelIndex, LoadSceneMode.Single);
+        timer = GameObject.FindGameObjectWithTag("Timer");
+        timer.SetActive(true);
     }
 }
