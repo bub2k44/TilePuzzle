@@ -24,6 +24,15 @@ public class CountdownTxt : MonoBehaviour
 
     private void Update()
     {
+        Timer();
+        //if (PermanentUI.perm.canTime==true)
+        //{
+        //    Timer();
+        //}
+    }
+
+    public void Timer()
+    {
         currentTime -= 1 * Time.deltaTime;
         countdownTxt.text = currentTime.ToString("0");
 

@@ -17,9 +17,13 @@ public class PermanentUI : MonoBehaviour
     public int stage = 1;//
     public int pieceCounter = 0;
     public int imageCount = 0;
+    public bool canTime = false;
+    public GameObject timer;
 
     private void Start()
     {
+        timer = GameObject.FindGameObjectWithTag("Timer");
+        canTime = true;
         DontDestroyOnLoad(gameObject);
 
         if (!perm)
@@ -29,7 +33,7 @@ public class PermanentUI : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }   
+        }
     }
 
     private void Update() => SetLevelUI();
@@ -110,20 +114,22 @@ public class PermanentUI : MonoBehaviour
         }*/
     }
 
-    private void EndStage()
+    public void EndStage()
     {
         StartCoroutine(NewLevel());
         SoundManager.PlaySound("PowerUp");
 
-        stage++;
-        if (stage == 4)
+        //stage++;
+        /*if (stage == 4)
         {
             level++;
             stage = 1;
-        }
+        }*/
         pieceCounter = 0;
         cameraShake.ShakeCamera();
         PlayFireWorks();
+        timer.SetActive(false);
+
     }
 
     private void EndLevel()
@@ -148,8 +154,18 @@ public class PermanentUI : MonoBehaviour
     }
 
     private IEnumerator NewLevel()
-    {  
+    {
         yield return new WaitForSeconds(2);
         ll.LoadNextLevel();
+        yield return new WaitForSeconds(1);
+        stage++;
+        //timer = GameObject.FindGameObjectWithTag("Timer");
+       // timer.SetActive(true);
+        //canTime = true;
+        if (stage == 4)
+        {
+            level++;
+            stage = 1;
+        }
     }
 }

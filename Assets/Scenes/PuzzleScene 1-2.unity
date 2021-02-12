@@ -3901,6 +3901,11 @@ PrefabInstance:
       propertyPath: holderBackground
       value: 
       objectReference: {fileID: 602299597}
+    - target: {fileID: 4382187014003008962, guid: 1ac518697cf95b7449ef3148fcad679e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Timer
+      objectReference: {fileID: 0}
     - target: {fileID: 4382187014003008967, guid: 1ac518697cf95b7449ef3148fcad679e,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -4033,6 +4038,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ac518697cf95b7449ef3148fcad679e, type: 3}
+--- !u!1 &1761811242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4382187015481376443, guid: 1ac518697cf95b7449ef3148fcad679e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1761811241}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1775454221
 GameObject:
   m_ObjectHideFlags: 0
@@ -4222,6 +4233,8 @@ MonoBehaviour:
   stage: 1
   pieceCounter: 0
   imageCount: 0
+  canTime: 0
+  timer: {fileID: 1761811242}
 --- !u!225 &3175669971911765954
 CanvasGroup:
   m_ObjectHideFlags: 0

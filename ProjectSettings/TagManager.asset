@@ -7,6 +7,7 @@ TagManager:
   - Puzzle
   - GM
   - Missile
+  - Timer
   layers:
   - Default
   - TransparentFX

@@ -4053,6 +4053,8 @@ MonoBehaviour:
   stage: 1
   pieceCounter: 0
   imageCount: 0
+  canTime: 0
+  timer: {fileID: 0}
 --- !u!225 &3175669971911765954
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4285,7 +4287,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4827,6 +4829,11 @@ PrefabInstance:
       propertyPath: holderBackground
       value: 
       objectReference: {fileID: 602299597}
+    - target: {fileID: 4382187014003008962, guid: 1ac518697cf95b7449ef3148fcad679e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Timer
+      objectReference: {fileID: 0}
     - target: {fileID: 4382187015481376443, guid: 1ac518697cf95b7449ef3148fcad679e,
         type: 3}
       propertyPath: m_Name
