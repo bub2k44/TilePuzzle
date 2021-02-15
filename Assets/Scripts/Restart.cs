@@ -15,5 +15,6 @@ public class Restart : MonoBehaviour
         replayButton.SetActive(false);
         timer.SetActive(true);
         countdownTxt.currentTime = countdownTxt.startTime;
+        PermanentUI.perm.pieceCounter = 0;
     }
 }
