@@ -5,7 +5,16 @@ public class MainMenu : MonoBehaviour
 {
     public LevelLoader ll;
 
-    public void PlayGame () => ll.LoadNextLevel();
+    private void Start()
+    {
+        PermanentUI.perm.timer.SetActive(false);
+    }
+
+
+    public void PlayGame()
+    {       
+        ll.LoadNextLevel();
+    }
 
     public void QuitGame() => Application.Quit();
 }

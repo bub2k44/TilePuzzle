@@ -12,8 +12,10 @@ public class Restart : MonoBehaviour
     public void OnButtonPress()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        PermanentUI.perm.pieceCounter = 0;
         replayButton.SetActive(false);
         timer.SetActive(true);
         countdownTxt.currentTime = countdownTxt.startTime;
+        Debug.Log("Found the Game Object");
     }
 }

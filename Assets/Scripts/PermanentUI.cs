@@ -10,7 +10,7 @@ public class PermanentUI : MonoBehaviour
 
     public TextMeshProUGUI scoreTxt = default;
     public TextMeshProUGUI levelTxt = default;
-    public TextMeshProUGUI stageTxt = default;//
+    public TextMeshProUGUI stageTxt = default;
 
     public ParticleSystem[] fireWorks;
 
@@ -21,7 +21,7 @@ public class PermanentUI : MonoBehaviour
 
     public int score = 0;
     public int level = 1;
-    public int stage = 1;//
+    public int stage = 1;
     public int pieceCounter = 0;
     public int imageCount = 0;
 
@@ -52,7 +52,7 @@ public class PermanentUI : MonoBehaviour
     {
         scoreTxt.text = score.ToString();
         levelTxt.text = level.ToString();
-        stageTxt.text = stage.ToString();//
+        stageTxt.text = stage.ToString();
 
         if (level == 1 && stage == 1 && pieceCounter == 6)
         {
@@ -70,40 +70,34 @@ public class PermanentUI : MonoBehaviour
         {
             EndStage();
             imagesLevel1[2].alpha = 1f;
-        }
-        if (level == 1 && stage == 4 && pieceCounter == 6)
-        {
-            EndStage();
-            imagesLevel1[3].alpha = 1f;
-        }
-
-        if (level == 1 && stage == 5 && pieceCounter == 6)
-        {
-            EndStage();
-            imagesLevel1[4].alpha = 1f;
 
             for (int i = 0; i < imagesLevel1.Length; i++)
             {
                 imagesLevel1[i].alpha = 0f;
-            }          
+            }
         }
 
-        if (level == 2 && stage == 1 && pieceCounter == 8)
+        if (level == 2 && stage == 1 && pieceCounter == 9)
         {      
             EndStage();
             imagesLevel2[0].alpha = 1f;
         }
 
-        if (level == 2 && stage == 2 && pieceCounter == 8)
+        if (level == 2 && stage == 2 && pieceCounter == 9)
         {
             EndStage();
             imagesLevel2[1].alpha = 1f;
         }
 
-        if (level == 2 && stage == 3 && pieceCounter == 8)
+        if (level == 2 && stage == 3 && pieceCounter == 9)
         {
             EndStage();
             imagesLevel1[0].alpha = 1f;
+
+            for (int i = 0; i < imagesLevel2.Length; i++)
+            {
+                imagesLevel2[i].alpha = 0f;
+            }
         }
          
         /*if (level == 2 && pieceCounter == 8)
@@ -176,7 +170,7 @@ public class PermanentUI : MonoBehaviour
         timer.SetActive(true);
         countdownTxt.currentTime = 20;
 
-        if (stage > 5)
+        if (stage > 3)
         {
             for (int j = 0; j < imagesLevel2.Length; j++)
             {
