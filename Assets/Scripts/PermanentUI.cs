@@ -16,12 +16,16 @@ public class PermanentUI : MonoBehaviour
 
     public CanvasGroup[] imagesLevel1;
     public CanvasGroup[] imagesLevel2;
+    public CanvasGroup[] imagesLevel3;
+    public CanvasGroup[] imagesLevel4;
+    public CanvasGroup[] imagesLevel5;
 
     public CameraShake cameraShake;
 
     public int score = 0;
     public int level = 1;
     public int stage = 1;
+
     public int pieceCounter = 0;
     public int imageCount = 0;
 
@@ -30,6 +34,11 @@ public class PermanentUI : MonoBehaviour
     public GameObject timer;
 
     public CountdownTxt countdownTxt;
+
+    private void Awake()
+    {
+        //level = 1;
+    }
 
     private void Start()
     {
@@ -54,102 +63,53 @@ public class PermanentUI : MonoBehaviour
         levelTxt.text = level.ToString();
         stageTxt.text = stage.ToString();
 
-        if (level == 1 && stage == 1 && pieceCounter == 6)
+        LevelUI(1, 6, imagesLevel1, countdownTxt.startTimeLvl1);
+        LevelUI(2, 9, imagesLevel2, countdownTxt.startTimeLvl2);
+        LevelUI(3, 12, imagesLevel3, countdownTxt.startTimeLvl3);
+        LevelUI(4, 15, imagesLevel4, countdownTxt.startTimeLvl4);
+        LevelUI(5, 18, imagesLevel5, countdownTxt.startTimeLvl5);
+    }
+
+    private void LevelUI(int _level, int _pieceCounter, CanvasGroup[] _imageLevel, float _countdownTxt)
+    {
+        if (level == _level && stage == 1 && pieceCounter == _pieceCounter)
         {
             EndStage();
-            imagesLevel1[0].alpha = 1f;
+            _imageLevel[0].alpha = 1f;
+
+
+            countdownTxt.currentTime = _countdownTxt;
         }
 
-        if (level == 1 && stage == 2 && pieceCounter == 6)
+        if (level == _level && stage == 2 && pieceCounter == _pieceCounter)
         {
             EndStage();
-            imagesLevel1[1].alpha = 1f;
+            _imageLevel[1].alpha = 1f;
+
+
+            countdownTxt.currentTime = _countdownTxt;
         }
 
-        if (level == 1 && stage == 3 && pieceCounter == 6)
+        if (level == _level && stage == 3 && pieceCounter == _pieceCounter)
         {
             EndStage();
-            imagesLevel1[2].alpha = 1f;
+            _imageLevel[2].alpha = 1f;
 
-            for (int i = 0; i < imagesLevel1.Length; i++)
-            {
-                imagesLevel1[i].alpha = 0f;
-            }
-        }
 
-        if (level == 2 && stage == 1 && pieceCounter == 9)
-        {      
-            EndStage();
-            imagesLevel2[0].alpha = 1f;
+            countdownTxt.currentTime = _countdownTxt;
         }
-
-        if (level == 2 && stage == 2 && pieceCounter == 9)
-        {
-            EndStage();
-            imagesLevel2[1].alpha = 1f;
-        }
-
-        if (level == 2 && stage == 3 && pieceCounter == 9)
-        {
-            EndStage();
-            imagesLevel1[0].alpha = 1f;
-
-            for (int i = 0; i < imagesLevel2.Length; i++)
-            {
-                imagesLevel2[i].alpha = 0f;
-            }
-        }
-         
-        /*if (level == 2 && pieceCounter == 8)
-        {
-            EndLevel();
-            images[1].alpha = 1f;
-        }
-        if (level == 3 && pieceCounter == 12)
-        {
-            EndLevel();
-            images[2].alpha = 1f;
-        }
-        if (level == 4 && pieceCounter == 18)
-        {
-            EndLevel();
-            images[3].alpha = 1f;
-        }
-        if (level == 5 && pieceCounter == 24)
-        {
-            EndLevel();
-            images[4].alpha = 1f;
-        }
-        if (level == 6)
-        {
-            EndLevel();
-            levelTxt.text = "";
-        }*/
     }
 
     public void EndStage()
     {
         StartCoroutine(NewLevel());
+
         SoundManager.PlaySound("PowerUp");
 
         pieceCounter = 0;
         cameraShake.ShakeCamera();
         PlayFireWorks();
         timer.SetActive(false);
-
-    }
-
-    private void EndLevel()
-    {
-        StartCoroutine(NewLevel());
-        SoundManager.PlaySound("PowerUp");
-
-        level++;
-        stage = 1;
-        
-        pieceCounter = 0;
-        cameraShake.ShakeCamera();
-        PlayFireWorks();
     }
 
     private void PlayFireWorks()
@@ -163,22 +123,44 @@ public class PermanentUI : MonoBehaviour
     private IEnumerator NewLevel()
     {
         yield return new WaitForSeconds(2);
+
         ll.LoadNextLevel();
         
         yield return new WaitForSeconds(1);
+
         stage++;
         timer.SetActive(true);
-        countdownTxt.currentTime = 20;
 
-        if (stage > 3)
+        //countdownTxt.currentTime = 100;//////////////////////
+
+        Level(1, 3, imagesLevel1, imagesLevel2, countdownTxt.startTimeLvl1);
+        Level(2, 3 ,imagesLevel2, imagesLevel3, countdownTxt.startTimeLvl2);
+        Level(3, 3, imagesLevel3, imagesLevel4, countdownTxt.startTimeLvl3);
+        Level(4, 3, imagesLevel4, imagesLevel5, countdownTxt.startTimeLvl4);
+        Level(5, 3, imagesLevel5, null, countdownTxt.startTimeLvl5);
+    }
+
+    private void Level(int _level, int _stage, CanvasGroup[] _current, CanvasGroup[] _next, float _currentTime)
+    {
+        if (level == _level && stage > _stage)
         {
-            for (int j = 0; j < imagesLevel2.Length; j++)
+            //countdownTxt.currentTime = _currentTime;//////////////////////////////
+
+            for (int j = 0; j < _current.Length; j++)
             {
-                imagesLevel2[j].alpha = 0.2f;
+                _current[j].alpha = 0.0f;
+            }
+
+            for (int j = 0; j < _next.Length; j++)
+            {
+                _next[j].alpha = 0.2f;
             }
 
             level++;
             stage = 1;
+
+
+            countdownTxt.currentTime = _currentTime;///////////////////////
         }
     }
 }

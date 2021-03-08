@@ -11,6 +11,7 @@ public class MyVideoPlayer : MonoBehaviour
     public IEnumerator StartNextScene()
     {
         yield return new WaitForSeconds(_time);
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

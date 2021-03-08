@@ -15,6 +15,7 @@ public class PuzzlePieces : MonoBehaviour
     public void SetPuzzle()
     {
         _holdBoxPosition = transform.position;
+
         transform.position = new Vector3(Random.Range(4f, 5.5f), Random.Range(1.75f, -2.5f));
     }
 
@@ -27,10 +28,15 @@ public class PuzzlePieces : MonoBehaviour
                 if (inHoldBoxPosition == false)
                 {
                     transform.position = _holdBoxPosition;
+
                     SoundManager.PlaySound("Teleport");
+
                     PermanentUI.perm.score++;
+
                     inHoldBoxPosition = true;
+
                     GetComponent<SortingGroup>().sortingOrder = 0;
+
                     PermanentUI.perm.pieceCounter++;
                 }
             }

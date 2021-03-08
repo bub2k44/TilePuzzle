@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public class MainMenu : MonoBehaviour
 {
     public LevelLoader ll;
@@ -10,7 +9,6 @@ public class MainMenu : MonoBehaviour
         PermanentUI.perm.timer.SetActive(false);
     }
 
-
     public void PlayGame()
     {       
         ll.LoadNextLevel();
@@ -18,4 +16,3 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame() => Application.Quit();
 }
-

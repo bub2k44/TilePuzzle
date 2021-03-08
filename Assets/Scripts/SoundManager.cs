@@ -5,8 +5,6 @@ public class SoundManager : MonoBehaviour
     static AudioSource audioSource;
 
     #region Static Audio Clips
-    public static AudioClip footSteps1;
-    public static AudioClip footSteps2;
     public static AudioClip coinPickUp;
     public static AudioClip powerUp;
     public static AudioClip knockBack;
@@ -24,17 +22,15 @@ public class SoundManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        footSteps1 = Resources.Load<AudioClip>("Footstep1");
-        footSteps2 = Resources.Load<AudioClip>("Footstep2");
         coinPickUp = Resources.Load<AudioClip>("CoinPickUp");
-        powerUp = Resources.Load<AudioClip>("PowerUp");
+        powerUp = Resources.Load<AudioClip>("PowerUp");//
         knockBack = Resources.Load<AudioClip>("KnockBack");
         looseLife = Resources.Load<AudioClip>("LooseLife");
         jump = Resources.Load<AudioClip>("Jump");
         land = Resources.Load<AudioClip>("Land");
         sprint = Resources.Load<AudioClip>("Sprint");
         climb = Resources.Load<AudioClip>("Climb");
-        teleport = Resources.Load<AudioClip>("Teleport");
+        teleport = Resources.Load<AudioClip>("Teleport");//
         squashed = Resources.Load<AudioClip>("Squashed");
         death = Resources.Load<AudioClip>("Death");
     }
@@ -43,14 +39,6 @@ public class SoundManager : MonoBehaviour
     {
         switch (_clip)
         {
-            case "Footstep1":
-                audioSource.PlayOneShot(footSteps1);
-                break;
-
-            case "Footstep2":
-                audioSource.PlayOneShot(footSteps2);
-                break;
-
             case "CoinPickUp":
                 audioSource.PlayOneShot(coinPickUp);
                 break;
