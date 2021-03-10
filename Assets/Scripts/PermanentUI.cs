@@ -22,7 +22,8 @@ public class PermanentUI : MonoBehaviour
 
     public CameraShake cameraShake;
 
-    public int score = 0;
+    public float score = 0;
+    public float displayScore = 0;
     public int level = 1;
     public int stage = 1;
 
@@ -53,13 +54,20 @@ public class PermanentUI : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        //score = 0;
+        //displayScore = 0;
+        //StartCoroutine(ScoreUpdated());
     }
 
     private void Update() => SetLevelUI();
 
     private void SetLevelUI()
     {
-        scoreTxt.text = score.ToString();
+        //StartCoroutine(ScoreUpdated());
+
+        //scoreTxt.text = score.ToString("0");
+
         levelTxt.text = level.ToString();
         stageTxt.text = stage.ToString();
 
@@ -78,7 +86,7 @@ public class PermanentUI : MonoBehaviour
             _imageLevel[0].alpha = 1f;
 
 
-            countdownTxt.currentTime = _countdownTxt;
+            //countdownTxt.currentTime = _countdownTxt;
         }
 
         if (level == _level && stage == 2 && pieceCounter == _pieceCounter)
@@ -87,7 +95,7 @@ public class PermanentUI : MonoBehaviour
             _imageLevel[1].alpha = 1f;
 
 
-            countdownTxt.currentTime = _countdownTxt;
+            //countdownTxt.currentTime = _countdownTxt;
         }
 
         if (level == _level && stage == 3 && pieceCounter == _pieceCounter)
@@ -96,7 +104,7 @@ public class PermanentUI : MonoBehaviour
             _imageLevel[2].alpha = 1f;
 
 
-            countdownTxt.currentTime = _countdownTxt;
+            //countdownTxt.currentTime = _countdownTxt;
         }
     }
 
@@ -109,7 +117,29 @@ public class PermanentUI : MonoBehaviour
         pieceCounter = 0;
         cameraShake.ShakeCamera();
         PlayFireWorks();
+
+
+        score = score + (5 * CountdownTxt.cdt.currentTime);
+        StartCoroutine(ScoreUpdated());
+
         timer.SetActive(false);
+    }
+
+    private IEnumerator ScoreUpdated()
+    {
+        while (true)
+        {
+            if (displayScore < score)
+            {
+                displayScore++;
+
+                scoreTxt.text = displayScore.ToString("0");
+            }
+
+            yield return new WaitForSeconds(0.02f);// make var
+
+            Debug.Log("ScoreCount");
+        }        
     }
 
     private void PlayFireWorks()
@@ -159,8 +189,28 @@ public class PermanentUI : MonoBehaviour
             level++;
             stage = 1;
 
+            if (PermanentUI.perm.level == 1)
+            {
+                CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl1;
+            }
+            if (PermanentUI.perm.level == 2)
+            {
+                CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl2;
+            }
+            if (PermanentUI.perm.level == 3)
+            {
+                CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl3;
+            }
+            if (PermanentUI.perm.level == 4)
+            {
+                CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl4;
+            }
+            if (PermanentUI.perm.level == 5)
+            {
+                CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl5;
+            }
 
-            countdownTxt.currentTime = _currentTime;///////////////////////
+            //countdownTxt.currentTime = _currentTime;///////////////////////
         }
     }
 }

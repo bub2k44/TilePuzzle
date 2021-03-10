@@ -3,6 +3,8 @@ using TMPro;
 
 public class CountdownTxt : MonoBehaviour
 {
+    public static CountdownTxt cdt;
+
     [SerializeField]
     private GameObject puzzleHolder = default;
 
@@ -33,6 +35,17 @@ public class CountdownTxt : MonoBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
+
+        if (!cdt)
+        {
+            cdt = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         //currentTime = startTimeLvl1;
 
         //if (PermanentUI.perm.level == 1)
