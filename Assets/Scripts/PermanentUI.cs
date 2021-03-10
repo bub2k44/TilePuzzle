@@ -36,11 +36,6 @@ public class PermanentUI : MonoBehaviour
 
     public CountdownTxt countdownTxt;
 
-    private void Awake()
-    {
-        //level = 1;
-    }
-
     private void Start()
     {
         canTime = true;
@@ -54,57 +49,40 @@ public class PermanentUI : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        //score = 0;
-        //displayScore = 0;
-        //StartCoroutine(ScoreUpdated());
     }
 
     private void Update() => SetLevelUI();
 
     private void SetLevelUI()
     {
-        //StartCoroutine(ScoreUpdated());
-
-        //scoreTxt.text = score.ToString("0");
-
         levelTxt.text = level.ToString();
         stageTxt.text = stage.ToString();
 
-        LevelUI(1, 6, imagesLevel1, countdownTxt.startTimeLvl1);
-        LevelUI(2, 9, imagesLevel2, countdownTxt.startTimeLvl2);
-        LevelUI(3, 12, imagesLevel3, countdownTxt.startTimeLvl3);
-        LevelUI(4, 15, imagesLevel4, countdownTxt.startTimeLvl4);
-        LevelUI(5, 18, imagesLevel5, countdownTxt.startTimeLvl5);
+        LevelUI(1, 6, imagesLevel1);
+        LevelUI(2, 9, imagesLevel2);
+        LevelUI(3, 12, imagesLevel3);
+        LevelUI(4, 15, imagesLevel4);
+        LevelUI(5, 18, imagesLevel5);
     }
 
-    private void LevelUI(int _level, int _pieceCounter, CanvasGroup[] _imageLevel, float _countdownTxt)
+    private void LevelUI(int _level, int _pieceCounter, CanvasGroup[] _imageLevel)
     {
         if (level == _level && stage == 1 && pieceCounter == _pieceCounter)
         {
             EndStage();
             _imageLevel[0].alpha = 1f;
-
-
-            //countdownTxt.currentTime = _countdownTxt;
         }
 
         if (level == _level && stage == 2 && pieceCounter == _pieceCounter)
         {
             EndStage();
             _imageLevel[1].alpha = 1f;
-
-
-            //countdownTxt.currentTime = _countdownTxt;
         }
 
         if (level == _level && stage == 3 && pieceCounter == _pieceCounter)
         {
             EndStage();
             _imageLevel[2].alpha = 1f;
-
-
-            //countdownTxt.currentTime = _countdownTxt;
         }
     }
 
@@ -117,7 +95,6 @@ public class PermanentUI : MonoBehaviour
         pieceCounter = 0;
         cameraShake.ShakeCamera();
         PlayFireWorks();
-
 
         score = score + (5 * CountdownTxt.cdt.currentTime);
         StartCoroutine(ScoreUpdated());
@@ -161,20 +138,17 @@ public class PermanentUI : MonoBehaviour
         stage++;
         timer.SetActive(true);
 
-        //countdownTxt.currentTime = 100;//////////////////////
-
-        Level(1, 3, imagesLevel1, imagesLevel2, countdownTxt.startTimeLvl1);
-        Level(2, 3 ,imagesLevel2, imagesLevel3, countdownTxt.startTimeLvl2);
-        Level(3, 3, imagesLevel3, imagesLevel4, countdownTxt.startTimeLvl3);
-        Level(4, 3, imagesLevel4, imagesLevel5, countdownTxt.startTimeLvl4);
-        Level(5, 3, imagesLevel5, null, countdownTxt.startTimeLvl5);
+        Level(1, 3, imagesLevel1, imagesLevel2);
+        Level(2, 3 ,imagesLevel2, imagesLevel3);
+        Level(3, 3, imagesLevel3, imagesLevel4);
+        Level(4, 3, imagesLevel4, imagesLevel5);
+        Level(5, 3, imagesLevel5, null);
     }
 
-    private void Level(int _level, int _stage, CanvasGroup[] _current, CanvasGroup[] _next, float _currentTime)
+    private void Level(int _level, int _stage, CanvasGroup[] _current, CanvasGroup[] _next)
     {
         if (level == _level && stage > _stage)
         {
-            //countdownTxt.currentTime = _currentTime;//////////////////////////////
 
             for (int j = 0; j < _current.Length; j++)
             {
@@ -209,8 +183,6 @@ public class PermanentUI : MonoBehaviour
             {
                 CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl5;
             }
-
-            //countdownTxt.currentTime = _currentTime;///////////////////////
         }
     }
 }
