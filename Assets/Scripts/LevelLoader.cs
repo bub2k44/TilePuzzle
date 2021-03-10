@@ -40,8 +40,6 @@ public class LevelLoader : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
 
         PermanentUI.perm.timer.SetActive(true);
-
-
         SceneManager.LoadScene(levelIndex, LoadSceneMode.Single);
     }
 }
