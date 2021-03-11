@@ -9,6 +9,7 @@ public class Restart : MonoBehaviour
     public CountdownTxt countdownTxt;
 
     public void OnButtonPress()
+        ///NEEDS TESTING
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
