@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DapperDino.Scoreboards;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -8,9 +9,34 @@ public class LevelLoader : MonoBehaviour
 
     public float transitionTime = 1.0f;
 
+    public Scoreboard scoreboard;
+
+    public Transform keyboard;
+
+    private void Start()
+    {
+        //keyboard = GameObject.FindGameObjectWithTag("Keyboard");
+    }
+
     public void LoadNextLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
 
     public void ReloadLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
+
+    public void LoadFinalScreen()
+    {
+        SceneManager.LoadScene("EndScene");
+
+        //ScoreboardSaveData savedScores = scoreboard.GetSavedScores();
+
+        //for (int i = 0; i < savedScores.highscores.Count; i++)
+        //{
+        //    if (PermanentUI.perm.score > savedScores.highscores[i].entryScore)
+        //    {
+        //        Instantiate(keyboard);
+        //        //keyboard.SetActive(true);
+        //    }
+        //}
+    }
 
     private IEnumerator LoadLevel(int levelIndex)
     {

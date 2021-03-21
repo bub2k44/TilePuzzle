@@ -6,6 +6,6 @@ namespace DapperDino.Scoreboards
     public struct ScoreboardEntryData
     {
         public string entryName;
-        public int entryScore;
+        public float entryScore;
     }
 }

@@ -11,6 +11,7 @@ TagManager:
   - HolderBackground
   - PuzzleHolder
   - ReplayButton
+  - Keyboard
   layers:
   - Default
   - TransparentFX

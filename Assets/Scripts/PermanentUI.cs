@@ -22,8 +22,8 @@ public class PermanentUI : MonoBehaviour
 
     public CameraShake cameraShake;
 
-    public float score = 0;
-    public float displayScore = 0;
+    public float score = 0;//float
+    public float displayScore = 0;//float
     public int level = 1;
     public int stage = 1;
 
@@ -131,8 +131,16 @@ public class PermanentUI : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        ll.LoadNextLevel();
-        
+        if (PermanentUI.perm.level > 1)
+        {
+            ll.LoadFinalScreen();////////////////////
+            //break;
+        }
+
+        ll.LoadFinalScreen();////////////////////
+
+        //ll.LoadNextLevel();
+
         yield return new WaitForSeconds(1);
 
         stage++;
@@ -182,6 +190,11 @@ public class PermanentUI : MonoBehaviour
             if (PermanentUI.perm.level == 5)
             {
                 CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl5;
+            }
+
+            if (PermanentUI.perm.level > 5)
+            {
+
             }
         }
     }

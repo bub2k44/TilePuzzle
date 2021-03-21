@@ -32,7 +32,7 @@ namespace DapperDino.Scoreboards
             AddEntry(new ScoreboardEntryData()
             {
                 entryName = myName.word,
-                entryScore = testEntryScore    
+                entryScore = (int)PermanentUI.perm.score   
             });
 
             myName.word = myName.word.Remove(myName.word.Length - 3, 1);
@@ -88,7 +88,7 @@ namespace DapperDino.Scoreboards
             }
         }
 
-        private ScoreboardSaveData GetSavedScores()
+        public ScoreboardSaveData GetSavedScores()
         {
             if (!File.Exists(SavePath))
             {
