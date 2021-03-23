@@ -1,21 +1,28 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TilePuzzles.Scoreboards;
 
-public class LevelLoader : MonoBehaviour
+public class LevelLoaderManager : MonoBehaviour
 {
+    public static LevelLoaderManager llm;
+
     public Animator transition;
 
     public float transitionTime = 1.0f;
 
-    public Scoreboard scoreboard;
-
-    public Transform keyboard;
-
     private void Start()
     {
-        //keyboard = GameObject.FindGameObjectWithTag("Keyboard");
+        DontDestroyOnLoad(gameObject);
+
+        if (!llm)
+        {
+            llm = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void LoadNextLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));

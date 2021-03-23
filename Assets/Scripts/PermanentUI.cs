@@ -99,7 +99,8 @@ public class PermanentUI : MonoBehaviour
 
         pieceCounter = 0;
         cameraShake.ShakeCamera();
-        PlayFireWorks();
+        //PlayFireWorks();
+        FireWorksManager.ffm.PlayFireWorks();
 
         score = score + (5 * CountdownTxt.cdt.currentTime);
         StartCoroutine(ScoreUpdated());

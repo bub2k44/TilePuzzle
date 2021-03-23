@@ -6,57 +6,57 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/StartGame.unity
+    path: Assets/Scenes/1 StartGame.unity
     guid: fbac4f1787e64494a8e531c37d7e9605
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/2 MainMenu.unity
     guid: 1be627dfc2aca08409224582463b5c0c
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene 1-1.unity
+    path: Assets/Scenes/3 PuzzleScene 1-1.unity
     guid: 98b029541a953584186d7d855bbe534c
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene 1-2.unity
+    path: Assets/Scenes/4 PuzzleScene 1-2.unity
     guid: ed7bd0e7625907340b131d56e7e1c188
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene 1-3.unity
+    path: Assets/Scenes/5 PuzzleScene 1-3.unity
     guid: 72dac96b9b6946a42827df0b9f35b0c5
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene 2-1.unity
+    path: Assets/Scenes/6 PuzzleScene 2-1.unity
     guid: e2b2d1a25f7c42e4bba88af5d79d1f7c
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene 2-2.unity
+    path: Assets/Scenes/7 PuzzleScene 2-2.unity
     guid: ddcb3f0284fb799469fcfec44832dd6c
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene 2-3.unity
+    path: Assets/Scenes/8 PuzzleScene 2-3.unity
     guid: 17e3436e4043daf42862057c8a63d01e
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene 3-1.unity
+    path: Assets/Scenes/9 PuzzleScene 3-1.unity
     guid: 1566ab313cf119d4ebd0c6517c9cc1ae
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene 3-2.unity
+    path: Assets/Scenes/10 PuzzleScene 3-2.unity
     guid: 1bd4053c556a1a74aa3b350b0f4cea73
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene 3-3.unity
+    path: Assets/Scenes/11 PuzzleScene 3-3.unity
     guid: 1f44a156a41e5884e85cb87f77f82de5
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene 4-1.unity
+    path: Assets/Scenes/12 PuzzleScene 4-1.unity
     guid: 9b00f862ad40e1e45b9b185bd98dc59f
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene 4-2.unity
+    path: Assets/Scenes/13 PuzzleScene 4-2.unity
     guid: 48057f0415b34744a80f2574e09f689c
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene 4-3.unity
+    path: Assets/Scenes/14 PuzzleScene 4-3.unity
     guid: f51d04b01f3253840956cb396339c296
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene 5-1.unity
+    path: Assets/Scenes/15 PuzzleScene 5-1.unity
     guid: 12ff91390b94b834eb05dbf2cc2c4d7f
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene 5-2.unity
+    path: Assets/Scenes/16 PuzzleScene 5-2.unity
     guid: 66b95c2bf2eeb4c49ab511983b6312a5
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene 5-3.unity
+    path: Assets/Scenes/17 PuzzleScene 5-3.unity
     guid: 184f60d3494db5e4ca38944b9c9009b8
   - enabled: 1
-    path: Assets/Scenes/EndScene.unity
+    path: Assets/Scenes/18 EndScene.unity
     guid: 5981427e197bc1148b95b58d524c1a10
   m_configObjects: {}
