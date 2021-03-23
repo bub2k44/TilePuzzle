@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DapperDino.Scoreboards
+namespace TilePuzzles.Scoreboards
 {
     [Serializable]
     public struct ScoreboardEntryData

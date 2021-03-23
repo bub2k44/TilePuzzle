@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 
-namespace DapperDino.Scoreboards
+namespace TilePuzzles.Scoreboards
 {
     public class Scoreboard : MonoBehaviour
     {
@@ -37,7 +37,8 @@ namespace DapperDino.Scoreboards
 
             myName.word = myName.word.Remove(myName.word.Length - 3, 1);
             myName.wordIndex = 0;
-            testEntryScore = 0;
+            //testEntryScore = 0;
+            PermanentUI.perm.score = 0;
             keyBoard.SetActive(false);
         }
 
@@ -50,7 +51,7 @@ namespace DapperDino.Scoreboards
             //Check if the score is high enough to be added.
             for (int i = 0; i < savedScores.highscores.Count; i++)
             {
-                if (testEntryScore > savedScores.highscores[i].entryScore)
+                if ((int)PermanentUI.perm.score > savedScores.highscores[i].entryScore)//testEntryScore
                 {
                     savedScores.highscores.Insert(i, scoreboardEntryData);
                     scoreAdded = true;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DapperDino.Scoreboards
+namespace TilePuzzles.Scoreboards
 {
     [Serializable]
     public class ScoreboardSaveData

@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace DapperDino.Scoreboards
+namespace TilePuzzles.Scoreboards
 {
     public class ScoreboardEntryUI : MonoBehaviour
     {

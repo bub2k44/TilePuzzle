@@ -28,6 +28,8 @@ public class CountdownTxt : MonoBehaviour
 
     public float currentTime;
 
+    public LevelLoader ll;
+
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -64,6 +66,8 @@ public class CountdownTxt : MonoBehaviour
             timer.SetActive(false);
             puzzleHolder.SetActive(false);
             holderBackground.SetActive(false);
+
+            ll.LoadFinalScreen();
             replayBtn.SetActive(true);
         }
         else

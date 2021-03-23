@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using DapperDino.Scoreboards;
+using TilePuzzles.Scoreboards;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -22,10 +22,36 @@ public class LevelLoader : MonoBehaviour
 
     public void ReloadLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
 
+    public void LoadStartMenu()
+    {
+        //transition.SetTrigger("start");
+
+        SceneManager.LoadScene("MainMenu");
+        PermanentUI.perm.gameLogo.SetActive(true);
+        PermanentUI.perm.dashBoard.SetActive(true);
+        PermanentUI.perm.timerUi.SetActive(true);
+        //PermanentUI.perm.timer.SetActive(true);
+        PermanentUI.perm.startMenuButtons.SetActive(true);
+        PermanentUI.perm.pieceCounter = 0;
+        PermanentUI.perm.level = 1;
+        PermanentUI.perm.score = 0;
+        PermanentUI.perm.displayScore = 0;
+        PermanentUI.perm.scoreTxt.text = PermanentUI.perm.displayScore.ToString("0");
+
+        Level(PermanentUI.perm.imagesLevel1);
+        //Level(PermanentUI.perm.imagesLevel2);
+        //Level(PermanentUI.perm.imagesLevel3);
+        //Level(PermanentUI.perm.imagesLevel4);
+        //Level(PermanentUI.perm.imagesLevel5);
+    }
+
     public void LoadFinalScreen()
     {
-        SceneManager.LoadScene("EndScene");
+        transition.SetTrigger("start");
 
+        SceneManager.LoadScene("EndScene");
+        PermanentUI.perm.timer.SetActive(false);
+        Debug.Log("LoadFinal");
         //ScoreboardSaveData savedScores = scoreboard.GetSavedScores();
 
         //for (int i = 0; i < savedScores.highscores.Count; i++)
@@ -67,5 +93,13 @@ public class LevelLoader : MonoBehaviour
 
         PermanentUI.perm.timer.SetActive(true);
         SceneManager.LoadScene(levelIndex, LoadSceneMode.Single);
+    }
+
+    private void Level(CanvasGroup[] _current)
+    {
+        for (int j = 0; j < _current.Length; j++)
+        {
+            _current[j].alpha = 0.2f;
+        }
     }
 }

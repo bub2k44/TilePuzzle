@@ -33,6 +33,11 @@ public class PermanentUI : MonoBehaviour
     public bool canTime = false;
 
     public GameObject timer;
+    public GameObject gameLogo;
+    public GameObject timerUi;
+    public GameObject dashBoard;
+
+    public GameObject startMenuButtons;
 
     public CountdownTxt countdownTxt;
 
@@ -114,8 +119,6 @@ public class PermanentUI : MonoBehaviour
             }
 
             yield return new WaitForSeconds(0.02f);// make var
-
-            Debug.Log("ScoreCount");
         }        
     }
 
@@ -133,24 +136,64 @@ public class PermanentUI : MonoBehaviour
 
         if (PermanentUI.perm.level > 1)
         {
+            //PermanentUI.perm.timer.SetActive(false);
+
+            timer.SetActive(false);
+            gameLogo.SetActive(false);
+            timerUi.SetActive(false); 
+            dashBoard.SetActive(false);
+
+
+            UnLevel(1, 3, imagesLevel1, null);
+            UnLevel(2, 3, imagesLevel2, null);
+            UnLevel(3, 3, imagesLevel3, null);
+            UnLevel(4, 3, imagesLevel4, null);
+            UnLevel(5, 3, imagesLevel5, null);
+
+            //imagesLevel1[0].alpha = 0.0f;
+
+            //for (int i = 0; i < imagesLevel1.Length; i++)
+            //{
+
+            //}
+
             ll.LoadFinalScreen();////////////////////
             //break;
         }
 
-        ll.LoadFinalScreen();////////////////////
+        //ll.LoadFinalScreen();////////////////////
+        else
+        {
+            ll.LoadNextLevel();
 
+            yield return new WaitForSeconds(1);
+
+            stage++;
+            timer.SetActive(true);
+
+            gameLogo.SetActive(true);
+            timerUi.SetActive(true);
+            dashBoard.SetActive(true);
+
+            Level(1, 3, imagesLevel1, imagesLevel2);
+            Level(2, 3, imagesLevel2, imagesLevel3);
+            Level(3, 3, imagesLevel3, imagesLevel4);
+            Level(4, 3, imagesLevel4, imagesLevel5);
+            Level(5, 3, imagesLevel5, null);
+        }
         //ll.LoadNextLevel();
 
-        yield return new WaitForSeconds(1);
+        
+    }
 
-        stage++;
-        timer.SetActive(true);
+    private void UnLevel(int _level, int _stage, CanvasGroup[] _current, CanvasGroup[] _next)
+    {
+        for (int j = 0; j < _current.Length; j++)
+        {
+            _current[j].alpha = 0.0f;
+        }
 
-        Level(1, 3, imagesLevel1, imagesLevel2);
-        Level(2, 3 ,imagesLevel2, imagesLevel3);
-        Level(3, 3, imagesLevel3, imagesLevel4);
-        Level(4, 3, imagesLevel4, imagesLevel5);
-        Level(5, 3, imagesLevel5, null);
+        PermanentUI.perm.timer.SetActive(false);
     }
 
     private void Level(int _level, int _stage, CanvasGroup[] _current, CanvasGroup[] _next)
