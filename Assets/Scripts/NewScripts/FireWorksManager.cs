@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireWorksManager : MonoBehaviour
 {
-    public static FireWorksManager ffm;
+    public static FireWorksManager fireWorksManager;
 
     public ParticleSystem[] fireWorks;
 
@@ -12,9 +12,9 @@ public class FireWorksManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        if (!ffm)
+        if (!fireWorksManager)
         {
-            ffm = this;
+            fireWorksManager = this;
         }
         else
         {

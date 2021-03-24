@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using TMPro;
 
-public class CountdownTxt : MonoBehaviour
+public class TimerManager : MonoBehaviour
 {
-    public static CountdownTxt cdt;
+    public static TimerManager cdt;
 
     [SerializeField]
     private GameObject puzzleHolder = default;

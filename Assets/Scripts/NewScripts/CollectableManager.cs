@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CollectableManager : MonoBehaviour
 {
-    public static CollectableManager cm;
+    public static CollectableManager colectableManager;
 
     public CanvasGroup[] imagesLevel1;
     public CanvasGroup[] imagesLevel2;
@@ -16,9 +16,9 @@ public class CollectableManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        if (!cm)
+        if (!colectableManager)
         {
-            cm = this;
+            colectableManager = this;
         }
         else
         {

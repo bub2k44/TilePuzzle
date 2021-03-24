@@ -39,7 +39,7 @@ public class PermanentUI : MonoBehaviour
 
     public GameObject startMenuButtons;
 
-    public CountdownTxt countdownTxt;
+    public TimerManager countdownTxt;
 
     private void Start()
     {
@@ -100,9 +100,9 @@ public class PermanentUI : MonoBehaviour
         pieceCounter = 0;
         cameraShake.ShakeCamera();
         //PlayFireWorks();
-        FireWorksManager.ffm.PlayFireWorks();
+        FireWorksManager.fireWorksManager.PlayFireWorks();
 
-        score = score + (5 * CountdownTxt.cdt.currentTime);
+        score = score + (5 * TimerManager.cdt.currentTime);
         StartCoroutine(ScoreUpdated());
 
         timer.SetActive(false);
@@ -120,7 +120,7 @@ public class PermanentUI : MonoBehaviour
             }
 
             yield return new WaitForSeconds(0.02f);// make var
-        }        
+        }
     }
 
     private void PlayFireWorks()
@@ -141,7 +141,7 @@ public class PermanentUI : MonoBehaviour
 
             timer.SetActive(false);
             gameLogo.SetActive(false);
-            timerUi.SetActive(false); 
+            timerUi.SetActive(false);
             dashBoard.SetActive(false);
 
 
@@ -184,7 +184,7 @@ public class PermanentUI : MonoBehaviour
         }
         //ll.LoadNextLevel();
 
-        
+
     }
 
     private void UnLevel(int _level, int _stage, CanvasGroup[] _current, CanvasGroup[] _next)
@@ -217,23 +217,23 @@ public class PermanentUI : MonoBehaviour
 
             if (PermanentUI.perm.level == 1)
             {
-                CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl1;
+                TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl1;
             }
             if (PermanentUI.perm.level == 2)
             {
-                CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl2;
+                TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl2;
             }
             if (PermanentUI.perm.level == 3)
             {
-                CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl3;
+                TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl3;
             }
             if (PermanentUI.perm.level == 4)
             {
-                CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl4;
+                TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl4;
             }
             if (PermanentUI.perm.level == 5)
             {
-                CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl5;
+                TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl5;
             }
 
             if (PermanentUI.perm.level > 5)

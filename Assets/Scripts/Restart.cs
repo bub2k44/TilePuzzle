@@ -6,7 +6,7 @@ public class Restart : MonoBehaviour
     public GameObject replayButton;
     public GameObject timer;
 
-    public CountdownTxt countdownTxt;
+    public TimerManager countdownTxt;
 
     public void OnButtonPress()
         ///NEEDS TESTING

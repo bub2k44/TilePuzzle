@@ -152,8 +152,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 219727052}
-  m_Father: {fileID: 871124722}
-  m_RootOrder: 2
+  m_Father: {fileID: 145037495}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -383,6 +383,37 @@ MonoBehaviour:
   replayButton: {fileID: 382336301}
   timer: {fileID: 419046330179441336}
   countdownTxt: {fileID: 419046330179441338}
+--- !u!1 &145037494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 145037495}
+  m_Layer: 0
+  m_Name: TimerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &145037495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145037494}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 68893641}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &204669771
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,7 +1149,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &512074001
 GameObject:
@@ -1429,6 +1460,10 @@ MonoBehaviour:
   image1: {fileID: 2116365451}
   image2: {fileID: 1993400254}
   image3: {fileID: 633674699}
+  isImage1: 0
+  is6thru10: 0
+  is11thru15: 0
+  is16thru20: 0
 --- !u!4 &590481547
 Transform:
   m_ObjectHideFlags: 0
@@ -1717,18 +1752,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b58566c77454d44092e0652137e17d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleHolder: {fileID: 0}
-  holderBackground: {fileID: 0}
-  timer: {fileID: 755946201}
-  countdownTxt: {fileID: 755946204}
-  startTimeLvl1: 20
-  startTimeLvl2: 40
-  startTimeLvl3: 60
-  startTimeLvl4: 80
-  startTimeLvl5: 100
-  replayBtn: {fileID: 0}
-  currentTime: 0
-  ll: {fileID: 6757919128802314246}
 --- !u!114 &755946204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1980,9 +2003,8 @@ Transform:
   m_Children:
   - {fileID: 1523081416}
   - {fileID: 924382040}
-  - {fileID: 68893641}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &871124723
 MonoBehaviour:
@@ -1996,9 +2018,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2760a8c82cefe4c9750dba3b7d14b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreTxt: {fileID: 0}
-  levelTxt: {fileID: 0}
-  stageTxt: {fileID: 0}
+  scoreTxt: {fileID: 1161145986}
+  levelTxt: {fileID: 2121493233}
+  stageTxt: {fileID: 1003589408}
+  countDownTxt: {fileID: 755946204}
   score: 0
   displayScore: 0
   level: 1
@@ -2006,6 +2029,14 @@ MonoBehaviour:
   pieceCounter: 0
   imageCount: 0
   canTime: 0
+  timer: {fileID: 68893640}
+  gameLogo: {fileID: 1530114031}
+  timerUi: {fileID: 68893640}
+  dashBoard: {fileID: 924382039}
+  puzzleHolder: {fileID: 0}
+  holderBackground: {fileID: 0}
+  startMenuButtons: {fileID: 633674699}
+  cameraShake: {fileID: 0}
 --- !u!1 &924382039
 GameObject:
   m_ObjectHideFlags: 0
@@ -3759,7 +3790,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1500920297}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2129479121}
+        m_MethodName: LoadStartMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1500920297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4332,7 +4374,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1634696408}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2129479121}
+        m_MethodName: LoadStartMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1634696408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4817,7 +4870,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1993400254
 GameObject:
@@ -4836,7 +4889,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1993400255
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5544,7 +5597,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2116365452
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7260,18 +7313,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b58566c77454d44092e0652137e17d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleHolder: {fileID: 0}
-  holderBackground: {fileID: 0}
-  timer: {fileID: 419046330179441336}
-  countdownTxt: {fileID: 419046330179441341}
-  startTimeLvl1: 20
-  startTimeLvl2: 40
-  startTimeLvl3: 60
-  startTimeLvl4: 80
-  startTimeLvl5: 100
-  replayBtn: {fileID: 1418267162}
-  currentTime: 0
-  ll: {fileID: 6757919128802314246}
 --- !u!224 &419046330179441339
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8411,7 +8452,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!225 &726083885129743474
 CanvasGroup:

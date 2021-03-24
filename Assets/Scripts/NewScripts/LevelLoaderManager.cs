@@ -23,33 +23,42 @@ public class LevelLoaderManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        BackgroundManager.backGroundManger.image1.SetActive(true);
+        BackgroundManager.backGroundManger.isImage1 = true;
     }
 
     public void LoadNextLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
 
-    public void ReloadLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
+    //public void LoadNextLevel()
+    //{
+        
+    //}
+
+    //public void ReloadLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
 
     public void LoadStartMenu()
     {
-        //transition.SetTrigger("start");
+        transition.SetTrigger("start");
 
         SceneManager.LoadScene("2 MainMenu");
-        PermanentUI.perm.gameLogo.SetActive(true);
-        PermanentUI.perm.dashBoard.SetActive(true);
-        PermanentUI.perm.timerUi.SetActive(true);
-        //PermanentUI.perm.timer.SetActive(true);
-        PermanentUI.perm.startMenuButtons.SetActive(true);
-        PermanentUI.perm.pieceCounter = 0;
-        PermanentUI.perm.level = 1;
-        PermanentUI.perm.score = 0;
-        PermanentUI.perm.displayScore = 0;
-        PermanentUI.perm.scoreTxt.text = PermanentUI.perm.displayScore.ToString("0");
 
-        Level(PermanentUI.perm.imagesLevel1);
-        //Level(PermanentUI.perm.imagesLevel2);
-        //Level(PermanentUI.perm.imagesLevel3);
-        //Level(PermanentUI.perm.imagesLevel4);
-        //Level(PermanentUI.perm.imagesLevel5);
+        BackgroundManager.backGroundManger.image1.SetActive(true);
+        BackgroundManager.backGroundManger.image2.SetActive(false);
+        BackgroundManager.backGroundManger.image3.SetActive(false);
+
+        UIManager.uim.gameLogo.SetActive(true);
+        UIManager.uim.dashBoard.SetActive(true);
+        UIManager.uim.timerUi.SetActive(true);
+        UIManager.uim.startMenuButtons.SetActive(true);
+
+        UIManager.uim.pieceCounter = 0;
+        UIManager.uim.level = 0;
+        UIManager.uim.score = 0;
+        UIManager.uim.displayScore = 0;
+        UIManager.uim.scoreTxt.text = UIManager.uim.displayScore.ToString("0");
+
+        Level(CollectableManager.colectableManager.imagesLevel1);
     }
 
     public void LoadFinalScreen()
@@ -57,18 +66,23 @@ public class LevelLoaderManager : MonoBehaviour
         transition.SetTrigger("start");
 
         SceneManager.LoadScene("EndScene");
-        PermanentUI.perm.timer.SetActive(false);
-        Debug.Log("LoadFinal");
-        //ScoreboardSaveData savedScores = scoreboard.GetSavedScores();
 
-        //for (int i = 0; i < savedScores.highscores.Count; i++)
-        //{
-        //    if (PermanentUI.perm.score > savedScores.highscores[i].entryScore)
-        //    {
-        //        Instantiate(keyboard);
-        //        //keyboard.SetActive(true);
-        //    }
-        //}
+        BackgroundManager.backGroundManger.image1.SetActive(false);
+        BackgroundManager.backGroundManger.image2.SetActive(false);
+        BackgroundManager.backGroundManger.image3.SetActive(true);
+
+        UIManager.uim.gameLogo.SetActive(true);
+        UIManager.uim.dashBoard.SetActive(true);
+        UIManager.uim.timerUi.SetActive(true);
+        UIManager.uim.startMenuButtons.SetActive(true);
+
+        UIManager.uim.pieceCounter = 0;
+        UIManager.uim.level = 0;
+        UIManager.uim.score = 0;
+        UIManager.uim.displayScore = 0;
+        UIManager.uim.scoreTxt.text = UIManager.uim.displayScore.ToString("0");
+
+        Level(CollectableManager.colectableManager.imagesLevel1);
     }
 
     private IEnumerator LoadLevel(int levelIndex)
@@ -77,23 +91,23 @@ public class LevelLoaderManager : MonoBehaviour
 
         if (PermanentUI.perm.level == 1)
         {
-            CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl1;
+            TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl1;
         }
         if (PermanentUI.perm.level == 2)
         {
-            CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl2;
+            TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl2;
         }
         if (PermanentUI.perm.level == 3)
         {
-            CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl3;
+            TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl3;
         }
         if (PermanentUI.perm.level == 4)
         {
-            CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl4;
+            TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl4;
         }
         if (PermanentUI.perm.level == 5)
         {
-            CountdownTxt.cdt.currentTime = CountdownTxt.cdt.startTimeLvl5;
+            TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl5;
         }
 
         yield return new WaitForSeconds(transitionTime);
