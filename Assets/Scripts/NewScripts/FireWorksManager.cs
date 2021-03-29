@@ -6,7 +6,10 @@ public class FireWorksManager : MonoBehaviour
 {
     public static FireWorksManager fireWorksManager;
 
-    public ParticleSystem[] fireWorks;
+    [SerializeField]
+    private ParticleSystem[] fireWorks;
+
+    public ParticleSystem[] FireWorks { get => fireWorks; set => fireWorks = value; }
 
     private void Start()
     {
@@ -24,9 +27,9 @@ public class FireWorksManager : MonoBehaviour
 
     public void PlayFireWorks()
     {
-        for (int i = 0; i < fireWorks.Length; i++)
+        for (int i = 0; i < FireWorks.Length; i++)
         {
-            fireWorks[i].Play();
+            FireWorks[i].Play();
         }
     }
 }

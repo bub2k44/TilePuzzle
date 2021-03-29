@@ -5,41 +5,65 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager uim;
+    public static UIManager instance;
 
-    public TextMeshProUGUI scoreTxt;
-    public TextMeshProUGUI levelTxt;
-    public TextMeshProUGUI stageTxt;
-    public TextMeshProUGUI countDownTxt;
+    [SerializeField]
+    private TextMeshProUGUI scoreTxt;
+    [SerializeField]
+    private TextMeshProUGUI levelTxt;
+    [SerializeField]
+    private TextMeshProUGUI stageTxt;
+    [SerializeField]
+    private TextMeshProUGUI countdownTxt;
+    [SerializeField]
+    private float score = 0;
+    [SerializeField]
+    private float displayScore = 0;
+    [SerializeField]
+    private float scoreUpdateTime = 0.02f;
+    [SerializeField]
+    private int level1 = 1;
+    [SerializeField]
+    private int stage = 1;
+    [SerializeField]
+    private int pieceCounter = 0;
+    [SerializeField]
+    private int imageCount = 0;
+    [SerializeField]
+    private CameraShake cameraShake;
+    [SerializeField]
+    private GameObject timerManager;
+    [SerializeField]
+    private GameObject puzzleHolder;
+    [SerializeField]
+    private GameObject holderBackground;
+    [SerializeField]
+    private GameObject finalScoreManager;
 
-    public float score = 0;
-    public float displayScore = 0;
-
-    public int level = 1;
-    public int stage = 1;
-
-    public int pieceCounter = 0;
-    public int imageCount = 0;
-
-    public bool canTime = false;
-
-    public GameObject timer;
-    public GameObject gameLogo;
-    public GameObject timerUi;
-    public GameObject dashBoard;
-    public GameObject puzzleHolder;
-    public GameObject holderBackground;
-    public GameObject startMenuButtons;
-
-    public CameraShake cameraShake;
+    public TextMeshProUGUI ScoreTxt { get => scoreTxt; set => scoreTxt = value; }
+    public TextMeshProUGUI LevelTxt { get => levelTxt; set => levelTxt = value; }
+    public TextMeshProUGUI StageTxt { get => stageTxt; set => stageTxt = value; }
+    public TextMeshProUGUI CountdownTxt { get => countdownTxt; set => countdownTxt = value; }
+    public float Score { get => score; set => score = value; }
+    public float DisplayScore { get => displayScore; set => displayScore = value; }
+    public float ScoreUpdateTime { get => scoreUpdateTime; set => scoreUpdateTime = value; }
+    public int Level1 { get => level1; set => level1 = value; }
+    public int Stage { get => stage; set => stage = value; }
+    public int PieceCounter { get => pieceCounter; set => pieceCounter = value; }
+    public int ImageCount { get => imageCount; set => imageCount = value; }
+    public CameraShake CameraShake { get => cameraShake; set => cameraShake = value; }
+    public GameObject TimerManager { get => timerManager; set => timerManager = value; }
+    public GameObject PuzzleHolder { get => puzzleHolder; set => puzzleHolder = value; }
+    public GameObject HolderBackground { get => holderBackground; set => holderBackground = value; }
+    public GameObject FinalScoreManager { get => finalScoreManager; set => finalScoreManager = value; }
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
 
-        if (!uim)
+        if (!instance)
         {
-            uim = this;
+            instance = this;
         }
         else
         {
@@ -51,31 +75,32 @@ public class UIManager : MonoBehaviour
 
     public void SetLevelUI()
     {
-        levelTxt.text = level.ToString();
-        stageTxt.text = stage.ToString();
-
-        LevelUI(1, 6, CollectableManager.colectableManager.imagesLevel1);
-        LevelUI(2, 9, CollectableManager.colectableManager.imagesLevel2);
-        LevelUI(3, 12, CollectableManager.colectableManager.imagesLevel3);
-        LevelUI(4, 15, CollectableManager.colectableManager.imagesLevel4);
-        LevelUI(5, 18, CollectableManager.colectableManager.imagesLevel5);
+        PuzzleHolder = GameObject.FindGameObjectWithTag("PuzzleHolder");
+        HolderBackground = GameObject.FindGameObjectWithTag("HolderBackground");
+        LevelTxt.text = Level1.ToString();
+        StageTxt.text = Stage.ToString();
+        LevelUI(1, 6, CollectableManager.instance.ImagesLevel1);
+        LevelUI(2, 9, CollectableManager.instance.ImagesLevel2);
+        LevelUI(3, 12, CollectableManager.instance.ImagesLevel3);
+        LevelUI(4, 15, CollectableManager.instance.ImagesLevel4);
+        LevelUI(5, 18, CollectableManager.instance.ImagesLevel5);
     }
 
     private void LevelUI(int _level, int _pieceCounter, CanvasGroup[] _imageLevel)
     {
-        if (level == _level && stage == 1 && pieceCounter == _pieceCounter)
+        if (Level1 == _level && Stage == 1 && PieceCounter == _pieceCounter)
         {
             EndStage();
             _imageLevel[0].alpha = 1f;
         }
 
-        if (level == _level && stage == 2 && pieceCounter == _pieceCounter)
+        else if (Level1 == _level && Stage == 2 && PieceCounter == _pieceCounter)
         {
             EndStage();
             _imageLevel[1].alpha = 1f;
         }
 
-        if (level == _level && stage == 3 && pieceCounter == _pieceCounter)
+        else if (Level1 == _level && Stage == 3 && PieceCounter == _pieceCounter)
         {
             EndStage();
             _imageLevel[2].alpha = 1f;
@@ -84,128 +109,100 @@ public class UIManager : MonoBehaviour
 
     public void EndStage()
     {
-        StartCoroutine(NewLevel());
-
-        SoundManager.PlaySound("PowerUp");
-
-        pieceCounter = 0;
-        cameraShake.ShakeCamera();
+        PieceCounter = 0;
+        CameraShake.ShakeCamera();
         FireWorksManager.fireWorksManager.PlayFireWorks();
-
-        score = score + (5 * TimerManager.cdt.currentTime);
+        Score = Score + (5 * global::TimerManager.instance.CurrentTime);
+        SoundManager.PlaySound("PowerUp");
         StartCoroutine(ScoreUpdated());
 
-        timer.SetActive(false);
+        if (Level1 == 5 && Stage == 3)
+        {
+            LevelLoaderManager.instance.LoadNextEndLevel();
+        }
+        else
+        {
+            StartCoroutine(NewLevel());            
+        } 
     }
 
     private IEnumerator ScoreUpdated()
     {
         while (true)
         {
-            if (displayScore < score)
+            if (DisplayScore < Score)
             {
-                displayScore++;
-
-                scoreTxt.text = displayScore.ToString("0");
+                DisplayScore++;
+                ScoreTxt.text = DisplayScore.ToString("0");
             }
 
-            yield return new WaitForSeconds(0.02f);// make var
+            yield return new WaitForSeconds(ScoreUpdateTime);
         }
     }
 
     private IEnumerator NewLevel()
     {
-        yield return new WaitForSeconds(2);
-
-        if (level > 1)
+        if (Level1 > 5)
         {
-            timer.SetActive(false);
-            gameLogo.SetActive(false);
-            timerUi.SetActive(false);
-            dashBoard.SetActive(false);
-
-            UnLevel(1, 3, CollectableManager.colectableManager.imagesLevel1, null);
-            UnLevel(2, 3, CollectableManager.colectableManager.imagesLevel2, null);
-            UnLevel(3, 3, CollectableManager.colectableManager.imagesLevel3, null);
-            UnLevel(4, 3, CollectableManager.colectableManager.imagesLevel4, null);
-            UnLevel(5, 3, CollectableManager.colectableManager.imagesLevel5, null);
-
-            LevelLoaderManager.llm.LoadFinalScreen();
+            BackgroundManager.instance.SetBackground(false, false, false, true);
+            DeactivatePuzzle();
+            CollectableManager.instance.HideAllImages();
+            LevelLoaderManager.instance.LoadNextEndLevel();
         }
         else
         {
-            LevelLoaderManager.llm.LoadNextLevel();
+            LevelLoaderManager.instance.LoadNextLevel();
 
             yield return new WaitForSeconds(1);
-
-            stage++;
-            timer.SetActive(true);
-
-            gameLogo.SetActive(true);
-            timerUi.SetActive(true);
-            dashBoard.SetActive(true);
-
-            Level(1, 3, CollectableManager.colectableManager.imagesLevel1, CollectableManager.colectableManager.imagesLevel2);
-            Level(2, 3, CollectableManager.colectableManager.imagesLevel2, CollectableManager.colectableManager.imagesLevel3);
-            Level(3, 3, CollectableManager.colectableManager.imagesLevel3, CollectableManager.colectableManager.imagesLevel4);
-            Level(4, 3, CollectableManager.colectableManager.imagesLevel4, CollectableManager.colectableManager.imagesLevel5);
-            Level(5, 3, CollectableManager.colectableManager.imagesLevel5, null);
+            Stage++;
+            ReactivatePuzzle();
+            Level(1, 3, CollectableManager.instance.ImagesLevel1, CollectableManager.instance.ImagesLevel2);
+            Level(2, 3, CollectableManager.instance.ImagesLevel2, CollectableManager.instance.ImagesLevel3);
+            Level(3, 3, CollectableManager.instance.ImagesLevel3, CollectableManager.instance.ImagesLevel4);
+            Level(4, 3, CollectableManager.instance.ImagesLevel4, CollectableManager.instance.ImagesLevel5);
+            Level(5, 3, CollectableManager.instance.ImagesLevel5, null);
         }
-    }
-
-    private void UnLevel(int _level, int _stage, CanvasGroup[] _current, CanvasGroup[] _next)
-    {
-        for (int j = 0; j < _current.Length; j++)
-        {
-            _current[j].alpha = 0.0f;
-        }
-
-        PermanentUI.perm.timer.SetActive(false);
     }
 
     private void Level(int _level, int _stage, CanvasGroup[] _current, CanvasGroup[] _next)
     {
-        if (level == _level && stage > _stage)
+        if (Level1 == _level && Stage > _stage)
         {
-
-            for (int j = 0; j < _current.Length; j++)
-            {
-                _current[j].alpha = 0.0f;
-            }
-
-            for (int j = 0; j < _next.Length; j++)
-            {
-                _next[j].alpha = 0.2f;
-            }
-
-            level++;
-            stage = 1;
-
-            if (PermanentUI.perm.level == 1)
-            {
-                TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl1;
-            }
-            if (PermanentUI.perm.level == 2)
-            {
-                TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl2;
-            }
-            if (PermanentUI.perm.level == 3)
-            {
-                TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl3;
-            }
-            if (PermanentUI.perm.level == 4)
-            {
-                TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl4;
-            }
-            if (PermanentUI.perm.level == 5)
-            {
-                TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl5;
-            }
-
-            if (PermanentUI.perm.level > 5)
-            {
-
-            }
+            CollectableManager.instance.HideImage(_current);
+            CollectableManager.instance.TransparentImage(_next);
+            Level1++;
+            Stage = 1;
+            global::TimerManager.instance.SelectStartTime();
         }
+    }
+
+    public void RestGamePlay()
+    {
+        PieceCounter = 0;
+        Level1 = 1;
+        Stage = 1;
+        DisplayScore = 0;
+        ScoreTxt.text = DisplayScore.ToString("0");
+    }
+
+    public void DeactivatePuzzle()
+    {
+        if (PuzzleHolder != null)
+        {
+            PuzzleHolder.SetActive(false);
+        }
+        if (HolderBackground != null)
+        {
+            HolderBackground.SetActive(false);
+        }
+            
+        TimerManager.SetActive(false);
+    }
+
+    public void ReactivatePuzzle()
+    {
+        PuzzleHolder.SetActive(true);
+        HolderBackground.SetActive(true);
+        TimerManager.SetActive(true);
     }
 }

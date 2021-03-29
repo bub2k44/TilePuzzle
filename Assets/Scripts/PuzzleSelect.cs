@@ -7,7 +7,7 @@ public class PuzzleSelect : MonoBehaviour
 
     public void SetPuzzlePhoto(Image photo)
     {
-        if (PermanentUI.perm.pieceCounter == 0)
+        if (UIManager.instance.PieceCounter == 0)
         {
             for (int i = 0; i < 18; i++)
             {

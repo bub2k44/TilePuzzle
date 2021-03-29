@@ -31,7 +31,7 @@ public class PuzzlePieces : MonoBehaviour
                     SoundManager.PlaySound("Teleport");           
                     inHoldBoxPosition = true;
                     GetComponent<SortingGroup>().sortingOrder = 0;
-                    PermanentUI.perm.pieceCounter++;
+                    UIManager.instance.PieceCounter++;
                 }
             }
         }

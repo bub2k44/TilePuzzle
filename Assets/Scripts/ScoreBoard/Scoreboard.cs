@@ -32,14 +32,12 @@ namespace TilePuzzles.Scoreboards
             AddEntry(new ScoreboardEntryData()
             {
                 entryName = myName.word,
-                entryScore = (int)PermanentUI.perm.score   
+                entryScore = (int)UIManager.instance.Score
             });
 
             myName.word = myName.word.Remove(myName.word.Length - 3, 1);
-            myName.wordIndex = 0;
-            //testEntryScore = 0;
-            PermanentUI.perm.score = 0;
-            keyBoard.SetActive(false);
+            myName.wordIndex = 0;           
+            keyBoard.SetActive(false);          
         }
 
         public void AddEntry(ScoreboardEntryData scoreboardEntryData)
@@ -51,7 +49,7 @@ namespace TilePuzzles.Scoreboards
             //Check if the score is high enough to be added.
             for (int i = 0; i < savedScores.highscores.Count; i++)
             {
-                if ((int)PermanentUI.perm.score > savedScores.highscores[i].entryScore)//testEntryScore
+                if ((int)UIManager.instance.Score > savedScores.highscores[i].entryScore)//testEntryScore
                 {
                     savedScores.highscores.Insert(i, scoreboardEntryData);
                     scoreAdded = true;
@@ -72,7 +70,6 @@ namespace TilePuzzles.Scoreboards
             }
 
             UpdateUI(savedScores);
-
             SaveScores(savedScores);
         }
 

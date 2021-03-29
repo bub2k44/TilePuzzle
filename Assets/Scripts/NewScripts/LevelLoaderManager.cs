@@ -1,126 +1,87 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelLoaderManager : MonoBehaviour
 {
-    public static LevelLoaderManager llm;
+    public static LevelLoaderManager instance;
 
-    public Animator transition;
+    [SerializeField]
+    private Animator transition;
+    [SerializeField]
+    private float transitionTime = 1.0f;
 
-    public float transitionTime = 1.0f;
+    public Animator Transition { get => transition; set => transition = value; }
+    public float TransitionTime { get => transitionTime; set => transitionTime = value; }
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
 
-        if (!llm)
+        if (!instance)
         {
-            llm = this;
+            instance = this;
         }
         else
         {
             Destroy(gameObject);
         }
 
-        BackgroundManager.backGroundManger.image1.SetActive(true);
-        BackgroundManager.backGroundManger.isImage1 = true;
+        UIManager.instance.TimerManager.SetActive(false);
+        UIManager.instance.FinalScoreManager.SetActive(false);
     }
 
     public void LoadNextLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+    public void LoadNextEndLevel() => StartCoroutine(LoadFinalScreen());
+    public void LoadNextMainMenu() => StartCoroutine(LoadStartMenu());
 
-    //public void LoadNextLevel()
-    //{
-        
-    //}
-
-    //public void ReloadLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
-
-    public void LoadStartMenu()
+    private IEnumerator LoadStartMenu()
     {
-        transition.SetTrigger("start");
+        UIManager.instance.FinalScoreManager.SetActive(false);
+
+        Transition.SetTrigger("start");
 
         SceneManager.LoadScene("2 MainMenu");
 
-        BackgroundManager.backGroundManger.image1.SetActive(true);
-        BackgroundManager.backGroundManger.image2.SetActive(false);
-        BackgroundManager.backGroundManger.image3.SetActive(false);
+        yield return new WaitForSeconds(TransitionTime);
 
-        UIManager.uim.gameLogo.SetActive(true);
-        UIManager.uim.dashBoard.SetActive(true);
-        UIManager.uim.timerUi.SetActive(true);
-        UIManager.uim.startMenuButtons.SetActive(true);
+        BackgroundManager.instance.SetBackground(false, true, false, false);
 
-        UIManager.uim.pieceCounter = 0;
-        UIManager.uim.level = 0;
-        UIManager.uim.score = 0;
-        UIManager.uim.displayScore = 0;
-        UIManager.uim.scoreTxt.text = UIManager.uim.displayScore.ToString("0");
+        UIManager.instance.Score = 0;
+        UIManager.instance.RestGamePlay();
 
-        Level(CollectableManager.colectableManager.imagesLevel1);
+        CollectableManager.instance.TransparentImage(CollectableManager.instance.ImagesLevel1);
     }
 
-    public void LoadFinalScreen()
+    private IEnumerator LoadFinalScreen()
     {
-        transition.SetTrigger("start");
+        Transition.SetTrigger("start");
 
-        SceneManager.LoadScene("EndScene");
+        yield return new WaitForSeconds(TransitionTime);
 
-        BackgroundManager.backGroundManger.image1.SetActive(false);
-        BackgroundManager.backGroundManger.image2.SetActive(false);
-        BackgroundManager.backGroundManger.image3.SetActive(true);
+        SceneManager.LoadScene("18 EndScene");
 
-        UIManager.uim.gameLogo.SetActive(true);
-        UIManager.uim.dashBoard.SetActive(true);
-        UIManager.uim.timerUi.SetActive(true);
-        UIManager.uim.startMenuButtons.SetActive(true);
+        UIManager.instance.FinalScoreManager.SetActive(true);
+        BackgroundManager.instance.SetBackground(false, false, false, true);
 
-        UIManager.uim.pieceCounter = 0;
-        UIManager.uim.level = 0;
-        UIManager.uim.score = 0;
-        UIManager.uim.displayScore = 0;
-        UIManager.uim.scoreTxt.text = UIManager.uim.displayScore.ToString("0");
+        UIManager.instance.RestGamePlay();
+        UIManager.instance.DeactivatePuzzle();
 
-        Level(CollectableManager.colectableManager.imagesLevel1);
+        CollectableManager.instance.HideAllImages();
     }
 
     private IEnumerator LoadLevel(int levelIndex)
     {
-        transition.SetTrigger("start");
+        Transition.SetTrigger("start");
 
-        if (PermanentUI.perm.level == 1)
-        {
-            TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl1;
-        }
-        if (PermanentUI.perm.level == 2)
-        {
-            TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl2;
-        }
-        if (PermanentUI.perm.level == 3)
-        {
-            TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl3;
-        }
-        if (PermanentUI.perm.level == 4)
-        {
-            TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl4;
-        }
-        if (PermanentUI.perm.level == 5)
-        {
-            TimerManager.cdt.currentTime = TimerManager.cdt.startTimeLvl5;
-        }
+        yield return new WaitForSeconds(TransitionTime);
 
-        yield return new WaitForSeconds(transitionTime);
+        TimerManager.instance.SelectStartTime();
 
-        PermanentUI.perm.timer.SetActive(true);
+        BackgroundManager.instance.SetBackground(false, false, true, false);
+
+        UIManager.instance.TimerManager.SetActive(true);
+
         SceneManager.LoadScene(levelIndex, LoadSceneMode.Single);
-    }
-
-    private void Level(CanvasGroup[] _current)
-    {
-        for (int j = 0; j < _current.Length; j++)
-        {
-            _current[j].alpha = 0.2f;
-        }
     }
 }

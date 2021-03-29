@@ -15,16 +15,23 @@ public class DragAndDrop : MonoBehaviour
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-            if (hit.transform.CompareTag("Puzzle"))
+            if (GameObject.FindGameObjectsWithTag("Puzzle") != null)
             {
-                if (!hit.transform.GetComponent<PuzzlePieces>().inHoldBoxPosition)
+                if ((hit.collider != null) && (hit.collider.CompareTag("Puzzle")))
                 {
-                    selectedPiece = hit.transform.gameObject;
+                    if (!hit.transform.GetComponent<PuzzlePieces>().inHoldBoxPosition)
+                    {
+                        selectedPiece = hit.transform.gameObject;
 
-                    selectedPiece.GetComponent<PuzzlePieces>().selected = true;
-                    selectedPiece.GetComponent<SortingGroup>().sortingOrder = _orderInLayer;
+                        selectedPiece.GetComponent<PuzzlePieces>().selected = true;
+                        selectedPiece.GetComponent<SortingGroup>().sortingOrder = _orderInLayer;
 
-                    _orderInLayer++;
+                        _orderInLayer++;
+                    }
+                }
+                else
+                {
+                    return;
                 }
             }
         }
