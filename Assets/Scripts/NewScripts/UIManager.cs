@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -15,12 +15,16 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI stageTxt;
     [SerializeField]
     private TextMeshProUGUI countdownTxt;
+
     [SerializeField]
     private float score = 0;
     [SerializeField]
     private float displayScore = 0;
     [SerializeField]
     private float scoreUpdateTime = 0.02f;
+
+    [SerializeField]
+    private int scoreRounded = 0;
     [SerializeField]
     private int level1 = 1;
     [SerializeField]
@@ -29,8 +33,10 @@ public class UIManager : MonoBehaviour
     private int pieceCounter = 0;
     [SerializeField]
     private int imageCount = 0;
+
     [SerializeField]
     private CameraShake cameraShake;
+
     [SerializeField]
     private GameObject timerManager;
     [SerializeField]
@@ -44,14 +50,19 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI LevelTxt { get => levelTxt; set => levelTxt = value; }
     public TextMeshProUGUI StageTxt { get => stageTxt; set => stageTxt = value; }
     public TextMeshProUGUI CountdownTxt { get => countdownTxt; set => countdownTxt = value; }
+
     public float Score { get => score; set => score = value; }
     public float DisplayScore { get => displayScore; set => displayScore = value; }
     public float ScoreUpdateTime { get => scoreUpdateTime; set => scoreUpdateTime = value; }
+
+    public int ScoreRounded { get => scoreRounded; set => scoreRounded = value; }
     public int Level1 { get => level1; set => level1 = value; }
     public int Stage { get => stage; set => stage = value; }
     public int PieceCounter { get => pieceCounter; set => pieceCounter = value; }
     public int ImageCount { get => imageCount; set => imageCount = value; }
+
     public CameraShake CameraShake { get => cameraShake; set => cameraShake = value; }
+
     public GameObject TimerManager { get => timerManager; set => timerManager = value; }
     public GameObject PuzzleHolder { get => puzzleHolder; set => puzzleHolder = value; }
     public GameObject HolderBackground { get => holderBackground; set => holderBackground = value; }
@@ -112,7 +123,7 @@ public class UIManager : MonoBehaviour
         PieceCounter = 0;
         CameraShake.ShakeCamera();
         FireWorksManager.fireWorksManager.PlayFireWorks();
-        Score = Score + (5 * global::TimerManager.instance.CurrentTime);
+        Score = Score + (5 * global::TimerManager.instance.CurrentTime); 
         SoundManager.PlaySound("PowerUp");
         StartCoroutine(ScoreUpdated());
 
@@ -133,7 +144,9 @@ public class UIManager : MonoBehaviour
             if (DisplayScore < Score)
             {
                 DisplayScore++;
-                ScoreTxt.text = DisplayScore.ToString("0");
+
+                ScoreRounded = (int)Math.Floor(DisplayScore);
+                ScoreTxt.text = ScoreRounded.ToString("0");
             }
 
             yield return new WaitForSeconds(ScoreUpdateTime);
@@ -152,7 +165,6 @@ public class UIManager : MonoBehaviour
         else
         {
             LevelLoaderManager.instance.LoadNextLevel();
-
             yield return new WaitForSeconds(1);
             Stage++;
             ReactivatePuzzle();

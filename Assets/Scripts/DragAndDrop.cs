@@ -22,10 +22,8 @@ public class DragAndDrop : MonoBehaviour
                     if (!hit.transform.GetComponent<PuzzlePieces>().inHoldBoxPosition)
                     {
                         selectedPiece = hit.transform.gameObject;
-
                         selectedPiece.GetComponent<PuzzlePieces>().selected = true;
                         selectedPiece.GetComponent<SortingGroup>().sortingOrder = _orderInLayer;
-
                         _orderInLayer++;
                     }
                 }
@@ -41,7 +39,6 @@ public class DragAndDrop : MonoBehaviour
             if (selectedPiece != null)
             {
                 selectedPiece.GetComponent<PuzzlePieces>().selected = false;
-
                 selectedPiece = null;
             }
         }
@@ -49,7 +46,6 @@ public class DragAndDrop : MonoBehaviour
         if (selectedPiece != null)
         {
             Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
             selectedPiece.transform.position = new Vector3(mousePoint.x, mousePoint.y, 0);
         }
     }

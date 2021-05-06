@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class FinalScoreManager : MonoBehaviour
@@ -28,6 +26,6 @@ public class FinalScoreManager : MonoBehaviour
 
     private void Update()
     {
-        ScoreText.text = UIManager.instance.Score.ToString("0");
+        ScoreText.text = UIManager.instance.ScoreRounded.ToString("0");
     }
 }

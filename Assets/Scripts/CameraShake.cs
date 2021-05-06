@@ -3,9 +3,7 @@
 public class CameraShake : MonoBehaviour
 {
     public float shakeMagnitude = 0.05f, shakeTime = 0.05f;
-
     private Vector3 cameraInitialPosition;
-
     private Camera mainCamera;
 
     private void Awake()
@@ -25,19 +23,15 @@ public class CameraShake : MonoBehaviour
     {
         float cameraShakeOffsetX = 2 * shakeMagnitude * 2 - shakeMagnitude;
         float cameraShakeOffsetY = 2 * shakeMagnitude * 2 + shakeMagnitude;
-
         Vector3 cameraIntermediatePosition = mainCamera.transform.position;
-
         cameraIntermediatePosition.x += cameraShakeOffsetX;
         cameraIntermediatePosition.y += cameraShakeOffsetY;
-
         mainCamera.transform.position = cameraIntermediatePosition;
     }
 
     private void StopCameraShake()
     {
         CancelInvoke("StartCameraShake");
-
         mainCamera.transform.position = cameraInitialPosition;
     }
 }

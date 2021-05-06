@@ -11,8 +11,7 @@ public class PuzzleSelect : MonoBehaviour
         {
             for (int i = 0; i < 18; i++)
             {
-                GameObject.Find("Piece (" + i + ")").transform.Find("Puzzle")
-                    .GetComponent<SpriteRenderer>().sprite = photo.sprite;
+                GameObject.Find("Piece (" + i + ")").transform.Find("Puzzle").GetComponent<SpriteRenderer>().sprite = photo.sprite;
             }
 
             startPanel.SetActive(false);

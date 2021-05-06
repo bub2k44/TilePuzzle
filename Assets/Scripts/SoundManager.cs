@@ -37,11 +37,9 @@ public class SoundManager : MonoBehaviour
             case "PowerUp":
                 audioSource.PlayOneShot(powerUp);
                 break;
-
             case "Teleport":
                 audioSource.PlayOneShot(teleport);
                 break;
-
             default:
                 break;
         }

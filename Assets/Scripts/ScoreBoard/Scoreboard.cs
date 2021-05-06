@@ -15,15 +15,14 @@ namespace TilePuzzles.Scoreboards
 
         public Name myName;
         public GameObject keyBoard;
+        public GameObject error;
 
         private string SavePath => $"{Application.persistentDataPath}/highscores.json";
 
         private void Start()
         {
             ScoreboardSaveData savedScores = GetSavedScores();
-
             UpdateUI(savedScores);
-
             SaveScores(savedScores);
         }
 
@@ -32,7 +31,7 @@ namespace TilePuzzles.Scoreboards
             AddEntry(new ScoreboardEntryData()
             {
                 entryName = myName.word,
-                entryScore = (int)UIManager.instance.Score
+                entryScore = UIManager.instance.ScoreRounded
             });
 
             myName.word = myName.word.Remove(myName.word.Length - 3, 1);
@@ -42,35 +41,41 @@ namespace TilePuzzles.Scoreboards
 
         public void AddEntry(ScoreboardEntryData scoreboardEntryData)
         {
-            ScoreboardSaveData savedScores = GetSavedScores();
-
-            bool scoreAdded = false;
-
-            //Check if the score is high enough to be added.
-            for (int i = 0; i < savedScores.highscores.Count; i++)
+            if (myName.wordIndex == myName.wordIndexMax)
             {
-                if ((int)UIManager.instance.Score > savedScores.highscores[i].entryScore)//testEntryScore
+                ScoreboardSaveData savedScores = GetSavedScores();
+                bool scoreAdded = false;
+
+                //Check if the score is high enough to be added.
+                for (int i = 0; i < savedScores.highscores.Count; i++)
                 {
-                    savedScores.highscores.Insert(i, scoreboardEntryData);
-                    scoreAdded = true;
-                    break;
+                    if ((int)UIManager.instance.Score > savedScores.highscores[i].entryScore)//testEntryScore
+                    {
+                        savedScores.highscores.Insert(i, scoreboardEntryData);
+                        scoreAdded = true;
+                        break;
+                    }
                 }
-            }
 
-            //Check if the score can be added to the end of the list.
-            if (!scoreAdded && savedScores.highscores.Count < maxScoreboardEntries)
+                //Check if the score can be added to the end of the list.
+                if (!scoreAdded && savedScores.highscores.Count < maxScoreboardEntries)
+                {
+                    savedScores.highscores.Add(scoreboardEntryData);
+                }
+
+                //Remove any scores past the limit.
+                if (savedScores.highscores.Count > maxScoreboardEntries)
+                {
+                    savedScores.highscores.RemoveRange(maxScoreboardEntries, savedScores.highscores.Count - maxScoreboardEntries);
+                }
+
+                UpdateUI(savedScores);
+                SaveScores(savedScores);
+            }
+            else
             {
-                savedScores.highscores.Add(scoreboardEntryData);
+                error.SetActive(true);
             }
-
-            //Remove any scores past the limit.
-            if (savedScores.highscores.Count > maxScoreboardEntries)
-            {
-                savedScores.highscores.RemoveRange(maxScoreboardEntries, savedScores.highscores.Count - maxScoreboardEntries);
-            }
-
-            UpdateUI(savedScores);
-            SaveScores(savedScores);
         }
 
         private void UpdateUI(ScoreboardSaveData savedScores)
@@ -97,7 +102,6 @@ namespace TilePuzzles.Scoreboards
             using (StreamReader stream = new StreamReader(SavePath))
             {
                 string json = stream.ReadToEnd();
-
                 return JsonUtility.FromJson<ScoreboardSaveData>(json);
             }
         }

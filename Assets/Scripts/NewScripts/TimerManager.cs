@@ -48,7 +48,6 @@ public class TimerManager : MonoBehaviour
     public void Timer()
     {
         CurrentTime -= 1 * Time.deltaTime;
-
         UIManager.instance.CountdownTxt.text = CurrentTime.ToString("0");
 
         if (CurrentTime <= 0)
@@ -56,7 +55,6 @@ public class TimerManager : MonoBehaviour
             CurrentTime = 0;
 
             UIManager.instance.DeactivatePuzzle();
-
             LevelLoaderManager.instance.LoadNextEndLevel();
         }
     }
