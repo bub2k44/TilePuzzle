@@ -124,7 +124,7 @@ public class UIManager : MonoBehaviour
         CameraShake.ShakeCamera();
         FireWorksManager.fireWorksManager.PlayFireWorks();
         Score = Score + (5 * global::TimerManager.instance.CurrentTime); 
-        SoundManager.PlaySound("PowerUp");
+        //SoundManager.PlaySound("PowerUp");
         StartCoroutine(ScoreUpdated());
 
         if (Level1 == 5 && Stage == 3)

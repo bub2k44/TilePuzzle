@@ -47,7 +47,7 @@ public class PuzzlePieces : MonoBehaviour
                     coll.enabled = false;
                     startBlinking = true;
                     transform.position = _holdBoxPosition;
-                    SoundManager.PlaySound("Teleport");
+                    //SoundManager.PlaySound("Teleport");
                     inHoldBoxPosition = true;
                     GetComponent<SortingGroup>().sortingOrder = 0;
                     UIManager.instance.PieceCounter++;
