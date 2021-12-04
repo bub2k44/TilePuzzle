@@ -1,0 +1,16 @@
+{
+"companyName": "Smiley Face Studios",
+"productName": "Tile Puzzles",
+"productVersion": "0.1",
+"dataUrl": "TilePuzzle.data.unityweb",
+"wasmCodeUrl": "TilePuzzle.wasm.code.unityweb",
+"wasmFrameworkUrl": "TilePuzzle.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.3.4f1"
+}
