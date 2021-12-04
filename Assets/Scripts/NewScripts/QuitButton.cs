@@ -13,7 +13,11 @@ public class QuitButton : MonoBehaviour
 
     public void ButtonPress()
     {
-        Application.ExternalEval("window.location=\"http://www.flywithbutchohare.com\"");//.editorconfig
+        //Application.ExternalEval("window.location='http://www.flywithbutchohare.com'");
+        //Application.ExternalEval("window.open(\"http://www.flywithbutchohare.com\")");
+        Application.ExternalEval("window.location=\"http://www.flywithbutchohare.com\"");
+
+        //Application.ExternalEval("window.location=\"http://www.flywithbutchohare.com\"");
         Application.Quit();
     }
 }

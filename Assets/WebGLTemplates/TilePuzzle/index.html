@@ -1,31 +1,29 @@
 <!DOCTYPE html>
-
 <html lang="en-us">
-
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | Tile Puzzles</title>
-
     <script src="Build/UnityLoader.js"></script>
-
     <script>
-      var gameInstance = UnityLoader.instantiate("unityContainer", "Build/TilePuzzle.json");
-
-      window.addEventListener("resize", onResize);
-
-      function onResize()
-      {
-        gameInstance.SendMessage("DebugText", "SetWidth", window.innerWidth);
-        gameInstance.SendMessage("DebugText", "SetHeight", window.innerHeight);
-        gameInstance.SendMessage("DebugText", "OnResize");
-      }
+      UnityLoader.instantiate("unityContainer", "Build/TilePuzzle.json");
     </script>
-
+  <style>
+      * {
+          overflow: hidden !important;
+          margin: 0 !important;
+      }
+    </style>
   </head>
-
-  <body style="margin:0; overflow:hidden;">
-    <div id="unityContainer"</div>
+  <body style="text-align: center; background: #231F20" onload="ResizeCanvas()">
+    <div id="unityContainer" style="width: 1920px; height: 1080px;"></div>
+	<script>
+	function ResizeCanvas() {
+            var unityCanvas = document.getElementById("unityContainer").style;
+            unityCanvas.width = "1920px";
+            unityCanvas.height = "1080px";
+            console.log(`Canvas resized to ${unityCanvas.width} X ${unityCanvas.height}.`);
+        }
+		</script>
   </body>
-
 </html>

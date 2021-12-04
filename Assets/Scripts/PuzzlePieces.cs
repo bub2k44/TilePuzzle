@@ -11,7 +11,7 @@ public class PuzzlePieces : MonoBehaviour
     public float spriteBlinkingTimer = 0.0f;
     public float spriteBlinkingMiniDuration = 0.1f;
     public float spriteBlinkingTotalTimer = 0.0f;
-    public float spriteBlinkingTotalDuration = .5f;//1.0f;
+    private float spriteBlinkingTotalDuration = .2f;// .5f;//1.0f;
     public bool startBlinking = false;
 
     private void Start()
